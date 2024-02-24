@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
         icon.gameObject.SetActive(false);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+            PlayerPrefs.DeleteAll();
+    }
+
     #region Change Scene
 
     public void ChangeScene(string sceneName)
