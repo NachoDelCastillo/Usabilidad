@@ -4,15 +4,42 @@ using UnityEngine;
 
 public class Tracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+    private static Tracker instance;
+    public static Tracker Instance { get { return instance; } }
+
+    private void Awake()
     {
-        
+        if (!instance)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    #endregion // endregion Singleton
+
+    #region Properties
+    IPersistence persistenceObject;
+    List<ITrackerAsset> activeTrackers;
+    #endregion // endregion Properties
+
+    #region Methods
+    public void Init()
+    {
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void End()
     {
-        
+
     }
+    public void TrackEvent()
+    {
+
+    }
+    #endregion // endregion Methods
 }
