@@ -4,4 +4,8 @@ public class SessionStartEvent : TrackerEvent
     {
         
     }
+    public override string ToJSON()
+    {
+        return base.ToJSON();
+    }
 }
