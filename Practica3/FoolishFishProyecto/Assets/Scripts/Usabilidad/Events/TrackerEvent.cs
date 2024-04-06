@@ -36,8 +36,6 @@ public abstract class TrackerEvent
     {
         string uniqueAttribute = SystemInfo.deviceUniqueIdentifier; // Puedes usar otro atributo único si lo prefieres
 
- 
-
         // Calcula el hash SHA-256 del atributo único
         using (SHA256 sha256Hash = SHA256.Create())
         {

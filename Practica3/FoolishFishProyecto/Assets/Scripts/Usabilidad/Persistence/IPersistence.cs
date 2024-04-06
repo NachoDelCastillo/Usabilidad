@@ -1,7 +1,5 @@
 public interface IPersistence
 {
-    public abstract void Send(TrackerEvent trackerEvent);
-    public abstract void Flush();
-
-
+    public void Send(string serializedEvent);
+    public void Flush();
 }

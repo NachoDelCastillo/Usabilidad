@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ServerPersistence : IPersistence
 {
-    public void Send(TrackerEvent trackerEvent)
+    public void Send(string serializedEvent)
     {
         throw new System.NotImplementedException();
     }

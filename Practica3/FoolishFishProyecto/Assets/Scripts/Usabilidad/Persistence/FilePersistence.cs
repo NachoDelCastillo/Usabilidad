@@ -1,16 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class FilePersistence : IPersistence
 {
-    public void Send(TrackerEvent trackerEvent)
+    public void Send(string serializedEvent)
     {
-        // Serializar el evento
-        ISerializer serializer = new JSONSerializer();
-
-        string serializedEvent = serializer.Serialize(trackerEvent);
-
         // Guardar en memoria
 
     }

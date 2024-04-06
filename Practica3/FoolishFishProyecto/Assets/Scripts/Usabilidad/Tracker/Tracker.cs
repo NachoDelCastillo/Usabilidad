@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +14,7 @@ public class Tracker : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            Init();
         }
         else
         {
@@ -23,14 +24,41 @@ public class Tracker : MonoBehaviour
     #endregion // endregion Singleton
 
     #region Properties
+    ISerializer serializerObject;
+
     IPersistence persistenceObject;
     List<ITrackerAsset> activeTrackers;
-    #endregion // endregion Properties
 
-    #region Methods
-    public void Init()
+    [Serializable]
+    enum SerializerType {
+        JSON, CSV
+    };
+	[Serializable]
+	enum PersistenceType {
+        LOCAL, SERVER
+    }
+
+	[Header("Configuration")]
+	[SerializeField]
+	SerializerType serializerType;
+	[SerializeField]
+	PersistenceType persistenceType;
+	#endregion // endregion Properties
+
+	#region Methods
+	public void Init()
     {
-        persistenceObject = new FilePersistence();
+        serializerObject = serializerType switch {
+            SerializerType.JSON => new JSONSerializer(),
+            SerializerType.CSV => new CSVSerializer(),
+            _ => throw new NotImplementedException()
+        };
+
+        persistenceObject = persistenceType switch {
+			PersistenceType.LOCAL => new FilePersistence(),
+			PersistenceType.SERVER => new ServerPersistence(),
+			_ => throw new NotImplementedException()
+		};
     }
 
     public void End()
@@ -40,7 +68,7 @@ public class Tracker : MonoBehaviour
 
     public void TrackEvent(TrackerEvent trackerEvent)
     {
-        persistenceObject.Send(trackerEvent);
+        persistenceObject.Send(serializerObject.Serialize(trackerEvent));
     }
     #endregion // endregion Methods
 }
