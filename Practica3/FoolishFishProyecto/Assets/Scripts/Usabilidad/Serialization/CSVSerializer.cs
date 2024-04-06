@@ -6,6 +6,6 @@ public class CSVSerializer : ISerializer
 {
     public string Serialize(TrackerEvent trackerEvent)
     {
-        throw new System.NotImplementedException();
+        return trackerEvent.ToCSV();
     }
 }

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Security.Cryptography;
 using System.Text;
+using System.Globalization;
 
 [Serializable]
 public abstract class TrackerEvent
@@ -54,7 +55,12 @@ public abstract class TrackerEvent
 
     public virtual string ToCSV()
     {
-        return "";
+        return csvColumns() + string.Format("\n{0},{1},{2},{3}", gameVersion, userId, eventType, timeStamp.ToString(CultureInfo.InvariantCulture));
+    }
+
+    protected virtual string csvColumns()
+    {
+        return "gameVersion,userID,eventType,timeStamp";
     }
 
     public virtual string ToJSON()
