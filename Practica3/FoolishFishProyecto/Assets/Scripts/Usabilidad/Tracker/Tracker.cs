@@ -6,7 +6,7 @@ public class Tracker : MonoBehaviour
 {
     #region Singleton
     private static Tracker instance;
-    public static Tracker Instance { get { return instance; } }
+    public static Tracker Instance => instance;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class Tracker : MonoBehaviour
     [Serializable]
     enum SerializerType {
         JSON, CSV
-    };
+    }
 	[Serializable]
 	enum PersistenceType {
         LOCAL, SERVER
