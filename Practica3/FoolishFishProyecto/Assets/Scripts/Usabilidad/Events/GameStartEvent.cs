@@ -1,6 +1,12 @@
 public class GameStartEvent : TrackerEvent
 {
-    GameStartEvent() : base(EventType.GAME_START) {
+    public GameStartEvent() : base(EventType.GAME_START)
+    {
 
+    }
+
+    public override string ToJSON()
+    {
+        return base.ToJSON();      
     }
 }
