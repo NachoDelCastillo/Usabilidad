@@ -18,7 +18,7 @@ public class TrackerEvent
     protected EventType eventType;
     double secondsSinceEpoch;
 
-    TrackerEvent() {
+    protected TrackerEvent() {
         gameVersion = Application.version;
 		//userId = ;
 
