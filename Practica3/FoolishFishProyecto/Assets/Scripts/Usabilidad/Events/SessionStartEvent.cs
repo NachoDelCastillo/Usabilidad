@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SessionStartEvent : TrackerEvent
 {
-    SessionStartEvent() : base()
+    public SessionStartEvent() : base(EventType.SESSION_START)
     {
         
     }

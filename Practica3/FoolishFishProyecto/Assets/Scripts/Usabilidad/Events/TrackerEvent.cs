@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
 
-public class TrackerEvent
+[Serializable]
+public abstract class TrackerEvent
 {
     static DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
@@ -16,23 +17,29 @@ public class TrackerEvent
     string gameVersion;
     string userId;
     protected EventType eventType;
-    double secondsSinceEpoch;
+    double timeStamp;
 
-    protected TrackerEvent() {
-        gameVersion = Application.version;
-		//userId = ;
+	protected TrackerEvent(EventType eventType) {
+		gameVersion = Application.version;
+        //userId = ;
+        this.eventType = eventType;
 
 		//Segundos que han pasado desde el 1/1/1970)
-		secondsSinceEpoch = (DateTime.UtcNow - epochStart).TotalSeconds; 
+		timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds; 
 	}
 
-	public string ToCSV()
+	public virtual string ToCSV()
     {
         return "";
     }
 
-    public string ToJSON()
+    public virtual string ToJSON()
     {
-        return "";
-    } 
+		return string.Format(
+			"\tgameVersion: \"{0}\"\n" +
+			"\tuserID: \"{1}\"\n" +
+			"\teventType: {2}\n" +
+			"\ttimeStamp: {3}\n", 
+            gameVersion, userId, eventType, timeStamp);
+	} 
 }

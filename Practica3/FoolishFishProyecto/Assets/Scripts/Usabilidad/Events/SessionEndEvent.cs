@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class SessionEndEvent : TrackerEvent
 {
-    SessionEndEvent() : base()
+    SessionEndEvent() : base(EventType.SESSION_END)
     {
 
     }

@@ -1,18 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class GameStartEvent : MonoBehaviour
+public class GameStartEvent : TrackerEvent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    GameStartEvent() : base(EventType.GAME_START) {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
