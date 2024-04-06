@@ -30,16 +30,17 @@ public class Tracker : MonoBehaviour
     #region Methods
     public void Init()
     {
-
+        persistenceObject = new FilePersistence();
     }
 
     public void End()
     {
 
     }
-    public void TrackEvent()
-    {
 
+    public void TrackEvent(TrackerEvent trackerEvent)
+    {
+        persistenceObject.Send(trackerEvent);
     }
     #endregion // endregion Methods
 }

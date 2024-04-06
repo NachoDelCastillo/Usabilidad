@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerPersistence : MonoBehaviour, IPersistence
+public class ServerPersistence : IPersistence
 {
     public void Send(TrackerEvent trackerEvent)
     {

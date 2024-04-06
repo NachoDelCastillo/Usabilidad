@@ -2,11 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FilePersistence : MonoBehaviour, IPersistence
+public class FilePersistence : IPersistence
 {
     public void Send(TrackerEvent trackerEvent)
     {
-        throw new System.NotImplementedException();
+        // Serializar el evento
+        ISerializer serializer = new JSONSerializer();
+
+        string serializedEvent = serializer.Serialize(trackerEvent);
+
+        // Guardar en memoria
+
     }
 
     public void Flush()
