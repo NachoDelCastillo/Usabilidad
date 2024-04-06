@@ -1,14 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class TrackerEvent : MonoBehaviour
+public class TrackerEvent
 {
-    public enum EVENT_TYPE { };
+    static DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
-    // commonContent?
+    public enum EventType {
+        SESSION_START, SESSION_END,
+        GAME_START, GAME_END,
+        JUMP_START, JUMP_END,
+        PLAYER_MOVE
+    };
 
-    public string ToCSV()
+    //Parametros comunes
+    string gameVersion;
+    string userId;
+    protected EventType eventType;
+    double secondsSinceEpoch;
+
+    TrackerEvent() {
+        gameVersion = Application.version;
+		//userId = ;
+
+		//Segundos que han pasado desde el 1/1/1970)
+		secondsSinceEpoch = (DateTime.UtcNow - epochStart).TotalSeconds; 
+	}
+
+	public string ToCSV()
     {
         return "";
     }
