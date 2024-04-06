@@ -25,7 +25,6 @@ public class Tracker : MonoBehaviour
 
     #region Properties
     ISerializer serializerObject;
-
     IPersistence persistenceObject;
     List<ITrackerAsset> activeTrackers;
 
@@ -39,10 +38,11 @@ public class Tracker : MonoBehaviour
     }
 
 	[Header("Configuration")]
-	[SerializeField]
-	SerializerType serializerType;
-	[SerializeField]
-	PersistenceType persistenceType;
+	[SerializeField] SerializerType serializerType;
+	[SerializeField] PersistenceType persistenceType;
+
+    [Header("Active Trackers")]
+    [SerializeField] bool fishMovementTracker;
 	#endregion // endregion Properties
 
 	#region Methods
@@ -59,6 +59,11 @@ public class Tracker : MonoBehaviour
 			PersistenceType.SERVER => new ServerPersistence(),
 			_ => throw new NotImplementedException()
 		};
+
+        activeTrackers = new List<ITrackerAsset>();
+        if (fishMovementTracker) {
+            activeTrackers.Add(new FishMovementTracker());
+        }
     }
 
     public void End()
@@ -68,7 +73,12 @@ public class Tracker : MonoBehaviour
 
     public void TrackEvent(TrackerEvent trackerEvent)
     {
-        persistenceObject.Send(serializerObject.Serialize(trackerEvent));
+        foreach(ITrackerAsset tracker in activeTrackers) {
+            if(tracker.accept(trackerEvent)) {
+                persistenceObject.Send(serializerObject.Serialize(trackerEvent));
+                return;
+            }
+        }
     }
     #endregion // endregion Methods
 }

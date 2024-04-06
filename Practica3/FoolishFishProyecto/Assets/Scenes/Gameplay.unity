@@ -11909,6 +11909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializerType: 0
   persistenceType: 0
+  fishMovementTracker: 1
 --- !u!4 &2139425148
 Transform:
   m_ObjectHideFlags: 0

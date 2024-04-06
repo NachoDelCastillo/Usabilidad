@@ -23,6 +23,10 @@ public abstract class TrackerEvent
     protected EventType eventType;
     double timeStamp;
 
+    public EventType Type() {
+        return eventType;
+    }
+
     protected TrackerEvent(EventType eventType)
     {
         gameVersion = Application.version;
@@ -32,9 +36,10 @@ public abstract class TrackerEvent
         //Segundos que han pasado desde el 1/1/1970)
         timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
     }
+
     private string GenerateUserId()
     {
-        string uniqueAttribute = SystemInfo.deviceUniqueIdentifier; // Puedes usar otro atributo único si lo prefieres
+        string uniqueAttribute = SystemInfo.deviceUniqueIdentifier;
 
         // Calcula el hash SHA-256 del atributo único
         using (SHA256 sha256Hash = SHA256.Create())
