@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Tracker : MonoBehaviour
@@ -21,7 +22,10 @@ public class Tracker : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     #endregion // endregion Singleton
+
+
 
     #region Properties
     ISerializer serializerObject;
@@ -68,8 +72,17 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
+        // Crear una instancia de GameStartEvent
+        GameStartEvent gameStartEvent = new GameStartEvent();
+
+        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
+        TrackEvent(gameStartEvent);
     }
 
+    private void OnDestroy()
+    {
+        End(); // Llama al método End al destruir el objeto Tracker
+    }
     public void End()
     {
         persistenceObject.Flush();
