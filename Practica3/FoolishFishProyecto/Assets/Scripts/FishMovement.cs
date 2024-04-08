@@ -366,7 +366,9 @@ public class FishMovement : MonoBehaviour
 
             anim.SetTrigger("Jump");
 
-            JumpStartEvent trackerEvent = new JumpStartEvent(1);
+
+            int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatform);
             Tracker.Instance.TrackEvent(trackerEvent);
         }
 
@@ -493,7 +495,9 @@ public class FishMovement : MonoBehaviour
             {
                 targetVelocity = Vector2.zero;
                 currentXvel = Mathf.Lerp(currentXvel, targetVelocity.x, Time.deltaTime * 10);
-                playerMoveEvent = new PlayerMoveEvent(1);
+
+                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
                 Tracker.Instance.TrackEvent(playerMoveEvent);
             }
             else
@@ -514,14 +518,18 @@ public class FishMovement : MonoBehaviour
             if (onLeftWall)
             {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
-                playerMoveEvent = new PlayerMoveEvent(1);
+
+                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
                 Tracker.Instance.TrackEvent(playerMoveEvent);
             }
 
             else if (onRightWall)
             {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
-                playerMoveEvent = new PlayerMoveEvent(1);
+
+                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
                 Tracker.Instance.TrackEvent(playerMoveEvent);
             }
 
@@ -630,7 +638,8 @@ public class FishMovement : MonoBehaviour
 
     void Land()
     {
-        JumpEndEvent trackerEvent = new JumpEndEvent(1);
+        int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+        JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform);
         Tracker.Instance.TrackEvent(trackerEvent);
 
 

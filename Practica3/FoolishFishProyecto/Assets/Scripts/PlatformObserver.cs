@@ -2,14 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformIdSelector : MonoBehaviour
+public class PlatformObserver : MonoBehaviour
 {
-    float[] platformPositions;
+    // Singleton
+    public static PlatformObserver Instance { get; private set; }
 
+    // Variables
+    float[] platformPositions;
     Transform fishMovement;
 
     private void Awake()
     {
+        Instance = this;
+
         // Obtener una referencia del pescado
         fishMovement = FindObjectOfType<FishMovement>().transform;
 
