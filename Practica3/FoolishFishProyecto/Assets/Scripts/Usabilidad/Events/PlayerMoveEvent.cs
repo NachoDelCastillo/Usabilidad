@@ -2,17 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveEvent : MonoBehaviour
+public class PlayerMoveEvent : TrackerEvent
 {
-    // Start is called before the first frame update
-    void Start()
+    int platformId;
+
+    public PlayerMoveEvent(int platformId) : base(EventType.PLAYER_MOVE)
     {
-        
+        this.platformId = platformId;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override string ToCSV()
     {
-        
+        return base.ToCSV();
+    }
+
+    public override string ToJSON()
+    {
+        return base.ToJSON() +
+            string.Format(
+            "\tplatformId: {0}\n",
+            platformId);
     }
 }
