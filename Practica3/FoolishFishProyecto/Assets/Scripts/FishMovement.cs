@@ -93,6 +93,8 @@ public class FishMovement : MonoBehaviour
     GameObject dustSystem;
     Vector3 jumpLastMousePos= new Vector3();
 
+    PlayerMoveEvent playerMoveEvent;
+
     public void OnEnable()
     {
         if (inputActions == null)
@@ -491,6 +493,8 @@ public class FishMovement : MonoBehaviour
             {
                 targetVelocity = Vector2.zero;
                 currentXvel = Mathf.Lerp(currentXvel, targetVelocity.x, Time.deltaTime * 10);
+                playerMoveEvent = new PlayerMoveEvent(1);
+                Tracker.Instance.TrackEvent(playerMoveEvent);
             }
             else
             {
@@ -508,9 +512,18 @@ public class FishMovement : MonoBehaviour
         else
         {
             if (onLeftWall)
+            {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
+                playerMoveEvent = new PlayerMoveEvent(1);
+                Tracker.Instance.TrackEvent(playerMoveEvent);
+            }
+
             else if (onRightWall)
+            {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
+                playerMoveEvent = new PlayerMoveEvent(1);
+                Tracker.Instance.TrackEvent(playerMoveEvent);
+            }
 
             currentYvel = Mathf.Lerp(currentYvel, targetVelocity.y, Time.deltaTime * 2);
             rb.velocity = new Vector3(0, currentYvel);
