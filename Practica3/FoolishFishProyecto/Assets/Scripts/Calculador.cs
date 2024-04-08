@@ -25,7 +25,7 @@ static class Calculador {
         { velocity.x = -50; }
 
         //Debug.Log("Velocidad de salto" + velocity);
-        Debug.Log("Posicion mouse" + targetCursor);
+        //Debug.Log("Posicion mouse" + targetCursor);
 
         // Aplica la velocidad al proyectil (puede ser un objeto, bala, etc.)
         // por ejemplo: rigidbody.velocity = velocity;
