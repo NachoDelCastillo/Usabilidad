@@ -363,6 +363,9 @@ public class FishMovement : MonoBehaviour
             rb.velocity = Vector3.zero;
 
             anim.SetTrigger("Jump");
+
+            JumpStartEvent trackerEvent = new JumpStartEvent(1);
+            Tracker.Instance.TrackEvent(trackerEvent);
         }
 
         #endregion
@@ -614,6 +617,10 @@ public class FishMovement : MonoBehaviour
 
     void Land()
     {
+        JumpEndEvent trackerEvent = new JumpEndEvent(1);
+        Tracker.Instance.TrackEvent(trackerEvent);
+
+
         GameplayManager.Instance.RecalculateWaterLevel(transform.position.y);
 
         AudioManager_PK.instance.Play("Land", Random.Range(0.9f, 1.1f));
