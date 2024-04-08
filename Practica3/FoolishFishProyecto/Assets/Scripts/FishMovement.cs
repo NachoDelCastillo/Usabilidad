@@ -374,7 +374,7 @@ public class FishMovement : MonoBehaviour
     #region Jump
 
     // Se llama cuando se activa el trigger en la animaci�n de salto del pez
-    public void JumpAnimationTrigger(){
+    public void JumpAnimationTrigger() {
         onJumpingAnimation = false;
         Jump();
     }
