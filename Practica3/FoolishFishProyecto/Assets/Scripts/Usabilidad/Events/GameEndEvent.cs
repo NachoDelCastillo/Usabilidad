@@ -9,7 +9,7 @@ public class GameEndEvent : TrackerEvent
     {
          return base.ToJSON() +
 			string.Format(
-			"\tgameCompleted: {0}\n",
+			"\t\"gameCompleted\": {0}\n",
 			gameCompleted);
 	}
 }

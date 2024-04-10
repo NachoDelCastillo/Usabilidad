@@ -18,9 +18,9 @@ public class JumpStartEvent : TrackerEvent
     }
 
     public override string ToJSON() {
-		return base.ToJSON() +
-			string.Format(
-			"\tplatformId: {0}\n",
+		return base.ToJSON() + ",\n" +
+            string.Format(
+			"\t\"platformId\": {0}\n",
 			platformId);
 	}
 }

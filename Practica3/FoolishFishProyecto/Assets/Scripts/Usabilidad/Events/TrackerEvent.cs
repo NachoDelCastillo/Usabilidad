@@ -69,10 +69,10 @@ public abstract class TrackerEvent
     public virtual string ToJSON()
     {
         return string.Format(
-            "\tgameVersion: \"{0}\"\n" +
-            "\tuserID: \"{1}\"\n" +
-            "\teventType: {2}\n" +
-            "\ttimeStamp: {3}\n",
-            gameVersion, userId, eventType, timeStamp);
+            "\t\"gameVersion\": \"{0}\",\n" +
+            "\t\"userID\": \"{1}\",\n" +
+            "\t\"eventType\": \"{2}\",\n" +
+            "\t\"timeStamp\": {3}",
+            gameVersion, userId, eventType.ToString(), timeStamp.ToString(CultureInfo.InvariantCulture));
     }
 }

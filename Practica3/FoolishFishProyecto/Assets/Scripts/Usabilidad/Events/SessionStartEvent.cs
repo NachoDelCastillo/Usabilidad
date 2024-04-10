@@ -13,8 +13,8 @@ public class SessionStartEvent : TrackerEvent
 
     public override string ToJSON()
     {
-        return base.ToJSON() +string.Format(
-            "\tstartTime: \"{0}\"\n",
+        return base.ToJSON() + ",\n" + string.Format(
+            "\t\"startTime\": \"{0}\"\n",
             startSessionTime.ToString("yyyy-MM-dd")); ;
     }
     

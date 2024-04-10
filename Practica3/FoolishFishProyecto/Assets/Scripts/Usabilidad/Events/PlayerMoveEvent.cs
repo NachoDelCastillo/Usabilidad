@@ -18,9 +18,9 @@ public class PlayerMoveEvent : TrackerEvent
 
     public override string ToJSON()
     {
-        return base.ToJSON() +
+        return base.ToJSON() + ",\n" +
             string.Format(
-            "\tplatformId: {0}\n",
+            "\t\"platformId\": {0}\n",
             platformId);
     }
 }

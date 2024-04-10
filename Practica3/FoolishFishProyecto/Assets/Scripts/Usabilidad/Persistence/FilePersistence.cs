@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System;
 
 public class FilePersistence : MonoBehaviour, IPersistence
 {
@@ -21,6 +22,28 @@ public class FilePersistence : MonoBehaviour, IPersistence
     public void Send(string serializedEvent)
     {
         eventQueue.Enqueue(serializedEvent);
+
+        Queue<string> auxEventQueue = new Queue<string>(eventQueue);
+
+        List<string> eventosSerializados = new List<string>();
+
+        while (auxEventQueue.Count > 0)
+        {
+            eventosSerializados.Add(auxEventQueue.Dequeue());
+        }
+
+        // Convertir la lista de eventos serializados a un string
+        string eventsJSON = "[" + string.Join(",\n", eventosSerializados.ToArray()) + "]";
+
+        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events.json");
+        File.WriteAllText(filePath, eventsJSON);
+
+        /* CSV EN PROCESO
+        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events.csv");
+        // Escribir los eventos en el archivo CSV
+        File.WriteAllLines(filePath, eventosSerializados.ToArray());
+         */
+
         Debug.Log("Evento encolado para persistencia: " + serializedEvent); // Mensaje de depuración
     }
 
