@@ -8,4 +8,9 @@ public class CSVSerializer : ISerializer
     {
         return trackerEvent.ToCSV();
     }
+
+    public string getFormat()
+    {
+        return ".csv";
+    }
 }

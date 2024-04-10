@@ -8,4 +8,9 @@ public class JSONSerializer : ISerializer
 			trackerEvent.ToJSON() + 
 			"}";
 	}
+
+	public string getFormat()
+	{
+		return ".json";
+	}
 }

@@ -19,8 +19,11 @@ public class FilePersistence : MonoBehaviour, IPersistence
         }
     }
 
-    public void Send(string serializedEvent)
+    public void Send(TrackerEvent trackerEvent, ISerializer serializerObject)
     {
+
+        string serializedEvent = serializerObject.Serialize(trackerEvent);
+
         eventQueue.Enqueue(serializedEvent);
 
         Queue<string> auxEventQueue = new Queue<string>(eventQueue);
@@ -32,17 +35,23 @@ public class FilePersistence : MonoBehaviour, IPersistence
             eventosSerializados.Add(auxEventQueue.Dequeue());
         }
 
-        // Convertir la lista de eventos serializados a un string
-        string eventsJSON = "[" + string.Join(",\n", eventosSerializados.ToArray()) + "]";
+        string fileFormat = serializerObject.getFormat();
+        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events" + fileFormat);
 
-        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events.json");
-        File.WriteAllText(filePath, eventsJSON);
+        if (fileFormat.Equals(".json"))
+        {
+            string eventsJSON = "[" + string.Join(",\n", eventosSerializados.ToArray()) + "]";
+            File.WriteAllText(filePath, eventsJSON);
+        }
 
-        /* CSV EN PROCESO
-        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events.csv");
-        // Escribir los eventos en el archivo CSV
-        File.WriteAllLines(filePath, eventosSerializados.ToArray());
-         */
+        else
+        {
+            string columns = "gameVersion,userID,eventType,timeStamp,arg1";
+
+            string events = columns + string.Join(",", eventosSerializados.ToArray());
+
+            File.WriteAllText(filePath, events);
+        }
 
         Debug.Log("Evento encolado para persistencia: " + serializedEvent); // Mensaje de depuración
     }

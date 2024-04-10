@@ -10,6 +10,10 @@ public class SessionStartEvent : TrackerEvent
         
     }
 
+    public override string ToCSV()
+    {
+        return base.ToCSV() + ",";
+    }
 
     public override string ToJSON()
     {

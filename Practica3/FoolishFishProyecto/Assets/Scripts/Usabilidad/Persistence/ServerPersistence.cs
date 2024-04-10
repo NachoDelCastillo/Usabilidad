@@ -1,6 +1,6 @@
 public class ServerPersistence : IPersistence
 {
-    public void Send(string serializedEvent)
+    public void Send(TrackerEvent serializedEvent, ISerializer serializerObject)
     {
         throw new System.NotImplementedException();
     }

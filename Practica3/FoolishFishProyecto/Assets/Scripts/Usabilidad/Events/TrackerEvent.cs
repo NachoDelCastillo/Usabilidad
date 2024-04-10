@@ -58,13 +58,9 @@ public abstract class TrackerEvent
 
     public virtual string ToCSV()
     {
-        return csvColumns() + string.Format("\n{0},{1},{2},{3}", gameVersion, userId, eventType, timeStamp.ToString(CultureInfo.InvariantCulture));
+        return string.Format("\n{0},{1},{2},{3}", gameVersion, userId, eventType, timeStamp.ToString(CultureInfo.InvariantCulture));
     }
 
-    protected virtual string csvColumns()
-    {
-        return "gameVersion,userID,eventType,timeStamp";
-    }
 
     public virtual string ToJSON()
     {

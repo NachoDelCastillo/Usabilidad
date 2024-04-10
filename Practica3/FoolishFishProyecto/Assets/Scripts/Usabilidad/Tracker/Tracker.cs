@@ -97,7 +97,7 @@ public class Tracker : MonoBehaviour
     {
         foreach (ITrackerAsset tracker in activeTrackers) {
             if (tracker.accept(trackerEvent)) {
-                persistenceObject.Send(serializerObject.Serialize(trackerEvent));
+                persistenceObject.Send(trackerEvent, serializerObject);
                 return;
             }
         }

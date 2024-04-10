@@ -12,11 +12,6 @@ public class JumpStartEvent : TrackerEvent
         return base.ToCSV() + string.Format(",{0}", platformId);
     }
 
-    protected override string csvColumns()
-    {
-        return base.csvColumns() + ",platformId";
-    }
-
     public override string ToJSON() {
 		return base.ToJSON() + ",\n" +
             string.Format(

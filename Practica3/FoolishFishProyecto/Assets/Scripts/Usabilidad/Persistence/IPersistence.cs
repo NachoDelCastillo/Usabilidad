@@ -1,5 +1,5 @@
 public interface IPersistence
 {
-    public void Send(string serializedEvent);
+    public void Send(TrackerEvent serializedEvent, ISerializer serializerObject);
     public void Flush();
 }

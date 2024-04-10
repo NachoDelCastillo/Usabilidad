@@ -13,7 +13,7 @@ public class PlayerMoveEvent : TrackerEvent
 
     public override string ToCSV()
     {
-        return base.ToCSV();
+        return base.ToCSV() + string.Format(",{0}", platformId);
     }
 
     public override string ToJSON()
