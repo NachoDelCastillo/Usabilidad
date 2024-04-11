@@ -48,7 +48,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
         {
             string columns = "gameVersion,userID,eventType,timeStamp,arg1";
 
-            string events = columns + string.Join(",", eventosSerializados.ToArray());
+            string events = columns + string.Join(string.Empty, eventosSerializados.ToArray());
 
             File.WriteAllText(filePath, events);
         }
