@@ -71,11 +71,14 @@ public class FishMovement : MonoBehaviour
 
     float xVelocityRemember;
 
-    bool canJump = false; 
+    bool canJump = false;
+
+    int currentPlatform;
 
     #region Input Setup
 
     PlayerControls inputActions;
+    InputAction movementAction;
     Vector2 movementInput;
 
     bool jump_performed; // Jump pressed this frame
@@ -100,7 +103,10 @@ public class FishMovement : MonoBehaviour
         if (inputActions == null)
         {
             inputActions = new PlayerControls();
-            inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+            movementAction = inputActions.PlayerMovement.Movement;
+
+			inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+			movementAction.performed += SendMoveEvent;
 
             inputActions.PlayerActions.Jump.performed += Jump_canceled;
             inputActions.PlayerActions.Jump.canceled += Jump_performed;
@@ -125,6 +131,15 @@ public class FishMovement : MonoBehaviour
        
         jump_canceled = true;
         jump_hold = false;
+    }
+
+    public void SendMoveEvent(InputAction.CallbackContext obj) {
+        if (obj.performed && (onLeftWall || onRightWall || onGround)) {
+            // send event
+            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+			playerMoveEvent = new PlayerMoveEvent(currentPlatform);
+			Tracker.Instance.TrackEvent(playerMoveEvent);
+		}
     }
 
     public void CanJumpNow()
@@ -366,8 +381,7 @@ public class FishMovement : MonoBehaviour
 
             anim.SetTrigger("Jump");
 
-
-            int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
             JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatform);
             Tracker.Instance.TrackEvent(trackerEvent);
         }
@@ -495,10 +509,6 @@ public class FishMovement : MonoBehaviour
             {
                 targetVelocity = Vector2.zero;
                 currentXvel = Mathf.Lerp(currentXvel, targetVelocity.x, Time.deltaTime * 10);
-
-                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
-                Tracker.Instance.TrackEvent(playerMoveEvent);
             }
             else
             {
@@ -518,19 +528,11 @@ public class FishMovement : MonoBehaviour
             if (onLeftWall)
             {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
-
-                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
-                Tracker.Instance.TrackEvent(playerMoveEvent);
             }
 
             else if (onRightWall)
             {
                 targetVelocity = new Vector2(0, movementInput.y * walkVelocity);
-
-                int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-                playerMoveEvent = new PlayerMoveEvent(currentPlatform);
-                Tracker.Instance.TrackEvent(playerMoveEvent);
             }
 
             currentYvel = Mathf.Lerp(currentYvel, targetVelocity.y, Time.deltaTime * 2);
@@ -638,7 +640,8 @@ public class FishMovement : MonoBehaviour
 
     void Land()
     {
-        int currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+
+        currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
         JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform);
         Tracker.Instance.TrackEvent(trackerEvent);
 

@@ -10914,6 +10914,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1718430215 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5909312067533146712, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+  m_PrefabInstance: {fileID: 3442261411001334418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1731373213
 GameObject:
   m_ObjectHideFlags: 0
@@ -11196,12 +11201,42 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6645760652731173885, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
   m_PrefabInstance: {fileID: 3442261411001334418}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1718430215}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d9d25d615f32a8e489f986befd50cd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1764979863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1718430215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 2b91e9b722e869d44a09508c4f780436, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player Movement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1001 &1767913565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53720,11 +53755,43 @@ PrefabInstance:
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1764979859}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SendMoveEvent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: FishMovement, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8962638486228844972, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1220934153082261603, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5909312067533146712, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1764979863}
   m_SourcePrefab: {fileID: 100100000, guid: f8bf59fdb9fd8644cb98d347bf4aae64, type: 3}
 --- !u!1839735485 &4168648472254961900
 Tilemap:
