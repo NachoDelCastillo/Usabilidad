@@ -381,9 +381,8 @@ public class FishMovement : MonoBehaviour
 
             anim.SetTrigger("Jump");
 
-            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatform);
-            Tracker.Instance.TrackEvent(trackerEvent);
+
+            Invoke("CheckJumpSucceded", .5f);
         }
 
         #endregion
@@ -472,6 +471,16 @@ public class FishMovement : MonoBehaviour
     }
 
     #endregion
+
+    void CheckJumpSucceded()
+    {
+        if (!onGround && !onLeftWall && !onRightWall)
+        {
+            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatform);
+            Tracker.Instance.TrackEvent(trackerEvent);
+        }
+    }
 
 
     void FixedUpdate()
