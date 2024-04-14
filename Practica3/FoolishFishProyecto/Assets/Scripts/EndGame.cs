@@ -34,6 +34,7 @@ public class EndGame : MonoBehaviour
         if (fish != null)
         {
 			Tracker.Instance.TrackEvent(new GameEndEvent(true));
+			Tracker.Instance.FlushEvents();
 
 			animator.SetTrigger("StartEndGame");
             duringAnimation = true;

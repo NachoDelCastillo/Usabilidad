@@ -1,11 +1,11 @@
 public class ServerPersistence : IPersistence
 {
-    public void Send(TrackerEvent serializedEvent, ISerializer serializerObject)
+    public void Send(TrackerEvent serializedEvent, ISerializer serializerObject, bool persistImmediately)
     {
         throw new System.NotImplementedException();
     }
 
-    public void Flush()
+    public void Flush(ISerializer serializerObject)
     {
         throw new System.NotImplementedException();
     }

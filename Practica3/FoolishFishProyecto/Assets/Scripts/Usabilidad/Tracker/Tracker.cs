@@ -22,10 +22,7 @@ public class Tracker : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     #endregion // endregion Singleton
-
-
 
     #region Properties
     ISerializer serializerObject;
@@ -44,6 +41,7 @@ public class Tracker : MonoBehaviour
 	[Header("Configuration")]
 	[SerializeField] SerializerType serializerType;
 	[SerializeField] PersistenceType persistenceType;
+    [SerializeField] bool persistImmediately;
 
     [Header("Active Trackers")]
     [SerializeField] bool generalTracker;
@@ -72,36 +70,31 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
-
-        // Crear una instancia de GameStartEvent
-        SessionStartEvent sessionStartEvent = new SessionStartEvent();
-
-        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
-        TrackEvent(sessionStartEvent);
     }
 
-    private void OnDestroy()
+	private void Start() {
+		TrackEvent(new SessionStartEvent());
+	}
+
+	private void OnDestroy()
     {
-        End(); // Llama al método End al destruir el objeto Tracker
-               // Crear una instancia de GameStartEvent
-        SessionEndEvent sessionEndEvent = new SessionEndEvent();
+        TrackEvent(new SessionEndEvent());
 
-        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
-        TrackEvent(sessionEndEvent);
-    }
-    public void End()
-    {
-        persistenceObject.Flush();
-    }
+        FlushEvents();
+	}
 
     public void TrackEvent(TrackerEvent trackerEvent)
     {
         foreach (ITrackerAsset tracker in activeTrackers) {
             if (tracker.accept(trackerEvent)) {
-                persistenceObject.Send(trackerEvent, serializerObject);
+                persistenceObject.Send(trackerEvent, serializerObject, persistImmediately);
                 return;
             }
         }
     }
+
+    public void FlushEvents() {
+		persistenceObject.Flush(serializerObject);
+	}
     #endregion // endregion Methods
 }
