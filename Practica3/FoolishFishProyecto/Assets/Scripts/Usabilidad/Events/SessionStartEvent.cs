@@ -13,4 +13,8 @@ public class SessionStartEvent : TrackerEvent
     {
         return base.ToCSV() + ",";
     }
+    public override string ToJSON()
+    {
+        return base.ToJSON()+"\n";
+    }
 }

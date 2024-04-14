@@ -2,11 +2,12 @@ using System;
 
 public class GameEndEvent : TrackerEvent
 {
-	bool gameCompleted;
+    bool gameCompleted;
 
-	public GameEndEvent(bool gameCompleted) : base(EventType.GAME_END) {
-		this.gameCompleted = gameCompleted;
-	}
+    public GameEndEvent(bool gameCompleted) : base(EventType.GAME_END)
+    {
+        this.gameCompleted = gameCompleted;
+    }
 
     public override string ToCSV()
     {
@@ -15,9 +16,7 @@ public class GameEndEvent : TrackerEvent
 
     public override string ToJSON()
     {
-         return base.ToJSON() +
-			string.Format(
-			"\t\"gameCompleted\": {0}\n",
-			gameCompleted);
-	}
+        return base.ToJSON() + ",\n" +
+                    string.Format("\t\"gameCompleted\": {0}\n", gameCompleted.ToString().ToLower());
+    }
 }
