@@ -35,7 +35,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
         }
 
         string fileFormat = serializerObject.getFormat();
-        string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "events" + fileFormat);
+        string filePath = Application.persistentDataPath +  "/events" + fileFormat;
 
         if (fileFormat.Equals(".json"))
         {
