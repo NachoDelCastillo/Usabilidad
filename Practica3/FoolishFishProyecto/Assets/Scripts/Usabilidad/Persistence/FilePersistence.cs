@@ -33,16 +33,24 @@ public class FilePersistence : IPersistence {
 	}
 
 	void PersistEvent(string serializedEvent, string fileFormat, string filePath) {
+		//Crear el archivo de eventos o añadir al que ya existe
 		bool doesFileExist = File.Exists(filePath);
 
-		//Crear el archivo de eventos o añadir al que ya existe
-		using (StreamWriter streamWriter = doesFileExist ? File.AppendText(filePath) : File.CreateText(filePath)) {
+		FileInfo fileInfo = new FileInfo(filePath);
+		using (StreamWriter streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))) {
 			switch (fileFormat) {
 				case ".json": {
-					//Añadimos la coma a excepcion de la primera vez
-					string comma = doesFileExist ? ",\n" : string.Empty;
+					if (doesFileExist) {
+						//Sustituimos el ultimo corchete por una coma
+						streamWriter.BaseStream.Seek(-1, SeekOrigin.End);
+						streamWriter.Write(",\n");
+					}
+					else {
+						//Escribimos el primer corchete
+						streamWriter.Write("[");
+					}
 
-					streamWriter.Write(comma + serializedEvent);
+					streamWriter.Write(serializedEvent + "]");
 				}
 				break;
 				case ".csv": {
