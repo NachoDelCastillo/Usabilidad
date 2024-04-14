@@ -21,7 +21,6 @@ public class FilePersistence : MonoBehaviour, IPersistence
 
     public void Send(TrackerEvent trackerEvent, ISerializer serializerObject)
     {
-
         string serializedEvent = serializerObject.Serialize(trackerEvent);
 
         eventQueue.Enqueue(serializedEvent);

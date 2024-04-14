@@ -48,7 +48,6 @@ public class Tracker : MonoBehaviour
     [Header("Active Trackers")]
     [SerializeField] bool generalTracker;
     [SerializeField] bool fishMovementTracker;
-    [SerializeField] bool sessionStartTracker;
 	#endregion // endregion Properties
 
 	#region Methods
@@ -73,10 +72,7 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
-        if (sessionStartTracker)
-        {
-            activeTrackers.Add(new SessionStartTracker());
-        }
+
         // Crear una instancia de GameStartEvent
         GameStartEvent gameStartEvent = new GameStartEvent();
 

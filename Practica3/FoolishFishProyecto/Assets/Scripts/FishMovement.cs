@@ -105,7 +105,7 @@ public class FishMovement : MonoBehaviour
             inputActions = new PlayerControls();
             movementAction = inputActions.PlayerMovement.Movement;
 
-			inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+			movementAction.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
 			movementAction.performed += SendMoveEvent;
 
             inputActions.PlayerActions.Jump.performed += Jump_canceled;
@@ -134,7 +134,7 @@ public class FishMovement : MonoBehaviour
     }
 
     public void SendMoveEvent(InputAction.CallbackContext obj) {
-        if (obj.performed && (onLeftWall || onRightWall || onGround)) {
+        if (movementInput.sqrMagnitude > 0.01 && (onLeftWall || onRightWall || onGround)) {
             // send event
             currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
 			playerMoveEvent = new PlayerMoveEvent(currentPlatform);
