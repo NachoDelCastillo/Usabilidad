@@ -1,0 +1,927 @@
+[{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "SESSION_START",
+	"timeStamp": 1713125963.99896
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "GAME_START",
+	"timeStamp": 1713125965.0049
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125967.54639,
+	"platformId": 1
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "GAME_END",
+	"timeStamp": 1713125969.0011,
+	"gameCompleted": false
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125969.59434,
+	"platformId": 1
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "GAME_START",
+	"timeStamp": 1713125974.38096
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125976.12836,
+	"platformId": 1
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125979.37213,
+	"platformId": 1
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125981.62869,
+	"platformId": 2
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125984.01124,
+	"platformId": 1
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125985.39298,
+	"platformId": 3
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125987.60833,
+	"platformId": 2
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125989.15012,
+	"platformId": 4
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125991.08735,
+	"platformId": 4
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125992.64989,
+	"platformId": 5
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125995.71334,
+	"platformId": 5
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713125997.39304,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713125999.331,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126000.40722,
+	"platformId": 7
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126002.6919,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126003.5873,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126005.90743,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126006.89417,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126008.67086,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126010.10829,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126011.7893,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126017.06701,
+	"platformId": 3
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126018.83107,
+	"platformId": 2
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126020.2689,
+	"platformId": 4
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126022.26849,
+	"platformId": 3
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126024.33098,
+	"platformId": 5
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126026.69213,
+	"platformId": 5
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126028.373,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126029.56712,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126030.63015,
+	"platformId": 7
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126032.4081,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126033.24807,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126037.76398,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126041.5873,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126044.58901,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126045.51099,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126045.99809,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126050.03308,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126051.62997,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126054.68543,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126055.47093,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126059.26928,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126063.63006,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126067.53284,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126069.15104,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126069.59562,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126070.35887,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126071.51904,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126073.32469,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126073.72023,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126074.5608,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126078.56835,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126088.42886,
+	"platformId": 5
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126092.5333,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126094.35259,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126095.5128,
+	"platformId": 7
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126097.65184,
+	"platformId": 6
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126098.53414,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126098.67282,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126102.97075,
+	"platformId": 8
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126104.2067,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126105.1441,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126109.78999,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126110.47075,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126114.72736,
+	"platformId": 11
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126115.03358,
+	"platformId": 11
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126121.88772,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126123.04061,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126124.19426,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126127.24874,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126129.28979,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126129.86019,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126137.65307,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126141.65185,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126143.47192,
+	"platformId": 9
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126145.08928,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126147.43051,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126148.69379,
+	"platformId": 11
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126149.03483,
+	"platformId": 11
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126152.2497,
+	"platformId": 10
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126153.8883,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126154.59751,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126158.33262,
+	"platformId": 12
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126160.67293,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126161.13119,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126169.72836,
+	"platformId": 13
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126171.11075,
+	"platformId": 14
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126171.34611,
+	"platformId": 14
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126175.95082,
+	"platformId": 14
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126177.58969,
+	"platformId": 15
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126178.14525,
+	"platformId": 15
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126184.08977,
+	"platformId": 16
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126187.93053,
+	"platformId": 16
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126190.333,
+	"platformId": 17
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126191.26334,
+	"platformId": 17
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126198.04915,
+	"platformId": 17
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126199.38833,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126201.77087,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126202.45133,
+	"platformId": 19
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126202.72223,
+	"platformId": 19
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "PLAYER_MOVE",
+	"timeStamp": 1713126203.08364,
+	"platformId": 19
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126209.72935,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126211.56936,
+	"platformId": 20
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126215.68806,
+	"platformId": 19
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126220.50669,
+	"platformId": 14
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126223.13226,
+	"platformId": 14
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126224.72935,
+	"platformId": 15
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126228.06948,
+	"platformId": 15
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126229.52813,
+	"platformId": 16
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126231.88999,
+	"platformId": 16
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126233.67303,
+	"platformId": 17
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126236.7295,
+	"platformId": 17
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126237.8123,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126239.47258,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126239.95099,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126243.18831,
+	"platformId": 18
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126244.97255,
+	"platformId": 20
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126250.09066,
+	"platformId": 20
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126251.47259,
+	"platformId": 21
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126254.57017,
+	"platformId": 21
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126255.65346,
+	"platformId": 22
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126260.66739,
+	"platformId": 21
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126262.52837,
+	"platformId": 23
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126266.3132,
+	"platformId": 23
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_END",
+	"timeStamp": 1713126267.75028,
+	"platformId": 24
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "JUMP_START",
+	"timeStamp": 1713126270.59138,
+	"platformId": 24
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "GAME_END",
+	"timeStamp": 1713126272.50868,
+	"gameCompleted": true
+},
+{
+	"gameVersion": "1.0",
+	"userID": "a1401cffa0e370612720169be2a6db6ad03f346fe4bcbd6a33e403f4e1699151",
+	"eventType": "SESSION_END",
+	"timeStamp": 1713126291.22701
+}]
