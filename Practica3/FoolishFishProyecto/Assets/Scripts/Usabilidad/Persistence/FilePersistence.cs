@@ -24,7 +24,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
         string serializedEvent = serializerObject.Serialize(trackerEvent);
 
         string fileFormat = serializerObject.getFormat();
-        string filePath = Application.persistentDataPath +  "/events" + fileFormat;
+        string filePath = Application.persistentDataPath + "/events" + fileFormat;
 
 
         if (!File.Exists(filePath))
@@ -34,7 +34,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
             {
                 if (fileFormat.Equals(".json"))
                 {
-                    string eventsJSON = serializedEvent + ",\n" ;
+                    string eventsJSON = serializedEvent + ",\n";
                     sw.Write(eventsJSON);
                 }
 
@@ -44,7 +44,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
 
                     string events = columns + string.Join(string.Empty, serializedEvent);
 
-                    
+
                     sw.Write(events);
                 }
             }
@@ -63,8 +63,7 @@ public class FilePersistence : MonoBehaviour, IPersistence
 
                 else
                 {
-                    string columns = "gameVersion,userID,eventType,timeStamp,arg1";
-                    string events = columns + string.Join(string.Empty, serializedEvent);
+                    string events = string.Join(string.Empty, serializedEvent);
                     sw.Write(events);
                 }
 
@@ -78,6 +77,6 @@ public class FilePersistence : MonoBehaviour, IPersistence
 
     public void Flush()
     {
-     
+
     }
 }
