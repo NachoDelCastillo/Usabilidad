@@ -72,11 +72,22 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
+
+        // Crear una instancia de GameStartEvent
+        SessionStartEvent sessionStartEvent = new SessionStartEvent();
+
+        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
+        TrackEvent(sessionStartEvent);
     }
 
     private void OnDestroy()
     {
         End(); // Llama al método End al destruir el objeto Tracker
+               // Crear una instancia de GameStartEvent
+        SessionEndEvent sessionEndEvent = new SessionEndEvent();
+
+        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
+        TrackEvent(sessionEndEvent);
     }
     public void End()
     {
