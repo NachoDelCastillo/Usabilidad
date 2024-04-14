@@ -33,7 +33,9 @@ public class EndGame : MonoBehaviour
         fish = collision.GetComponent<FishMovement>();
         if (fish != null)
         {
-            animator.SetTrigger("StartEndGame");
+			Tracker.Instance.TrackEvent(new GameEndEvent(true));
+
+			animator.SetTrigger("StartEndGame");
             duringAnimation = true;
             //fish.transform.SetParent(fishParent);
             fish.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Kinematic;

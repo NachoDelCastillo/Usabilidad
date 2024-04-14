@@ -72,12 +72,6 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
-
-        // Crear una instancia de GameStartEvent
-        GameStartEvent gameStartEvent = new GameStartEvent();
-
-        // Llamar al método TrackEvent para enviar el evento al sistema de seguimiento
-        TrackEvent(gameStartEvent);
     }
 
     private void OnDestroy()

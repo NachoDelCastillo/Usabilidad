@@ -4,8 +4,8 @@ public class GameEndEvent : TrackerEvent
 {
 	bool gameCompleted;
 
-	GameEndEvent() : base(EventType.GAME_END) {
-
+	public GameEndEvent(bool gameCompleted) : base(EventType.GAME_END) {
+		this.gameCompleted = gameCompleted;
 	}
 
     public override string ToCSV()
