@@ -75,6 +75,8 @@ public class FishMovement : MonoBehaviour
 
     int currentPlatform;
 
+    int currentPlatformWhenJumped;
+
     #region Input Setup
 
     PlayerControls inputActions;
@@ -381,7 +383,7 @@ public class FishMovement : MonoBehaviour
 
             anim.SetTrigger("Jump");
 
-
+            currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
             Invoke("CheckJumpSucceded", .5f);
         }
 
@@ -476,9 +478,11 @@ public class FishMovement : MonoBehaviour
     {
         if (!onGround && !onLeftWall && !onRightWall)
         {
-            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatform);
+            //currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped);
             Tracker.Instance.TrackEvent(trackerEvent);
+
+            Debug.Log("JUMP FROM " + currentPlatformWhenJumped);
         }
     }
 
@@ -653,6 +657,9 @@ public class FishMovement : MonoBehaviour
         currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
         JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform);
         Tracker.Instance.TrackEvent(trackerEvent);
+
+        Debug.Log("LAND FROM " + currentPlatform);
+
 
 
         GameplayManager.Instance.RecalculateWaterLevel(transform.position.y);
