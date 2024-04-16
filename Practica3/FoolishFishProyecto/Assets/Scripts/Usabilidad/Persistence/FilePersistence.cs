@@ -57,6 +57,8 @@ public class FilePersistence : IPersistence {
 					//Añadimos las columnas solo la primera vez
 					string columns = doesFileExist ? string.Empty : "gameVersion,userID,eventType,timeStamp,arg1";
 
+					//Escribimos siempre al final (append)
+					streamWriter.BaseStream.Seek(0, SeekOrigin.End);
 					streamWriter.Write(columns + serializedEvent);
 				}
 				break;
