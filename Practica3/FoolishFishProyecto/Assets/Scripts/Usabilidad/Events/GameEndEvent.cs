@@ -14,9 +14,8 @@ public class GameEndEvent : TrackerEvent
         return base.ToCSV() + string.Format(",{0}", gameCompleted);
     }
 
-    public override string ToJSON()
+    protected override string CompleteParameters()
     {
-        return base.ToJSON() + ",\n" +
-                    string.Format("\t\"gameCompleted\": {0}\n", gameCompleted.ToString().ToLower());
+        return ",\n" + string.Format("\t\"gameCompleted\": {0}\n", gameCompleted.ToString().ToLower());
     }
 }

@@ -62,14 +62,24 @@ public abstract class TrackerEvent
     }
 
     //No virtual
-    public virtual string ToJSON()
+    public string ToJSON()
     {
-        //Poner aqui las llaves y llamar a un metodo virtual completaparameters()
-        return string.Format(
+        string returnValue = 
+            
+            "{"
+
+            + string.Format(
             "\t\"gameVersion\": \"{0}\",\n" +
             "\t\"userID\": \"{1}\",\n" +
             "\t\"eventType\": \"{2}\",\n" +
             "\t\"timeStamp\": {3}",
-            gameVersion, userId, eventType.ToString(), timeStamp.ToString(CultureInfo.InvariantCulture));
+            gameVersion, userId, eventType.ToString(), timeStamp.ToString(CultureInfo.InvariantCulture))
+
+            + CompleteParameters()
+            + "}";
+        return returnValue;
     }
+
+    protected virtual string CompleteParameters()
+    {  return ""; }
 }
