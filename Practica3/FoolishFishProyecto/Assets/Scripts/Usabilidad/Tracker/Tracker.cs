@@ -58,7 +58,7 @@ public class Tracker : MonoBehaviour
         };
 
         persistenceObject = persistenceType switch {
-			PersistenceType.LOCAL => new FilePersistence(),
+			PersistenceType.LOCAL => new FilePersistence(serializerObject),
 			PersistenceType.SERVER => new ServerPersistence(),
 			_ => throw new NotImplementedException()
 		};
@@ -87,14 +87,14 @@ public class Tracker : MonoBehaviour
     {
         foreach (ITrackerAsset tracker in activeTrackers) {
             if (tracker.accept(trackerEvent)) {
-                persistenceObject.Send(trackerEvent, serializerObject, persistImmediately);
+                persistenceObject.Send(trackerEvent, persistImmediately);
                 return;
             }
         }
     }
 
     public void FlushEvents() {
-		persistenceObject.Flush(serializerObject);
+		persistenceObject.Flush();
 	}
     #endregion // endregion Methods
 }

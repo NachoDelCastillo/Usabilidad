@@ -3,71 +3,63 @@ using System.Collections.Generic;
 using System.IO;
 
 public class FilePersistence : IPersistence {
-	//Guardar el evento sin serializar
-	private Queue<string> eventQueue = new Queue<string>();
+	ISerializer serializerObject;
+	Queue<TrackerEvent> eventQueue;
+	string filePath;
+	StreamWriter streamWriter;
 
-	public void Send(TrackerEvent trackerEvent, ISerializer serializerObject, bool persistImmediately) {
-		string serializedEvent = serializerObject.Serialize(trackerEvent);
+	public FilePersistence(ISerializer serializerObject) {
+		this.serializerObject = serializerObject;
+		eventQueue = new Queue<TrackerEvent>();
 
 		string fileFormat = serializerObject.getFormat();
-		string filePath = Application.persistentDataPath + "/events" + fileFormat;
+		filePath = Application.persistentDataPath + "/events" + fileFormat;
+
+		//Crear el archivo de eventos o añadir al que ya existe
+		bool doesFileExist = File.Exists(filePath);
+		FileInfo fileInfo = new FileInfo(filePath);
+		streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite));
+
+		if(!doesFileExist)
+			streamWriter.Write(serializerObject.Header());
+		else
+			streamWriter.BaseStream.Seek(serializerObject.SeekEndOffset(), SeekOrigin.Begin);
+	}
+
+	~FilePersistence() {
+		streamWriter.Write(serializerObject.EndOfFile());
+
+		streamWriter.Close();
+	}
+
+	public void Send(TrackerEvent trackerEvent, bool persistImmediately) {
 
 		if (persistImmediately) {
-			PersistEvent(serializedEvent, fileFormat, filePath);
+			PersistEvent(trackerEvent);
 			Debug.Log("Evento persistido: " + trackerEvent.Type());
 		}
 		else {
-			eventQueue.Enqueue(serializedEvent);
+			eventQueue.Enqueue(trackerEvent);
 			Debug.Log("Evento encolado: " + trackerEvent.Type()); 
 		}
 	}
 
-	public void Flush(ISerializer serializerObject) {
-		string fileFormat = serializerObject.getFormat();
-		string filePath = Application.persistentDataPath + "/events" + fileFormat;
-
+	public void Flush() {
 		int enqueuedEvents = eventQueue.Count;
 		while (eventQueue.Count > 0) {
-			PersistEvent(eventQueue.Dequeue(), fileFormat, filePath);
+			PersistEvent(eventQueue.Dequeue());
 		}
 		Debug.Log("Persistidos " + enqueuedEvents + " eventos de la cola.");
 	}
 
-	void PersistEvent(string serializedEvent, string fileFormat, string filePath) {
-		//Crear el archivo de eventos o añadir al que ya existe
-		bool doesFileExist = File.Exists(filePath);
+	void PersistEvent(TrackerEvent trackerEvent) {
+		//Escribir en el fichero
+		streamWriter.Write(serializerObject.Prefix());
+		streamWriter.Write(serializerObject.Serialize(trackerEvent));
+		streamWriter.Write(serializerObject.Suffix());
+	}
 
-		FileInfo fileInfo = new FileInfo(filePath);
-		using (StreamWriter streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))) {
-			switch (fileFormat) {
-				//ILEGAL mover al serializerobject
-				case ".json": {
-					if (doesFileExist) {
-						//Sustituimos el ultimo corchete por una coma
-						streamWriter.BaseStream.Seek(-1, SeekOrigin.End);
-						streamWriter.Write(",\n");
-					}
-					else {
-						//Escribimos el primer corchete
-						streamWriter.Write("[");
-					}
-
-					streamWriter.Write(serializedEvent + "]");
-				}
-				break;
-				case ".csv": {
-					//Añadimos las columnas solo la primera vez
-					string columns = doesFileExist ? string.Empty : "gameVersion,userID,eventType,timeStamp,arg1";
-
-					//Escribimos siempre al final (append)
-					streamWriter.BaseStream.Seek(0, SeekOrigin.End);
-					streamWriter.Write(columns + serializedEvent);
-				}
-				break;
-				default:
-					throw new System.NotImplementedException("No se ha implementado el formato " + fileFormat);
-
-			}
-		}
+	public void SetSerializerObject(ISerializer serializerObject) {
+		this.serializerObject = serializerObject;
 	}
 }
