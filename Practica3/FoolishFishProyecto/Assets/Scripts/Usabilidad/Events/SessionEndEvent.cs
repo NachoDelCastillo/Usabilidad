@@ -10,8 +10,4 @@ public class SessionEndEvent : TrackerEvent
         return base.ToCSV() + ",";
     }
 
-    public override string ToJSON()
-    {
-        return base.ToJSON() + "\n";
-    }
 }
