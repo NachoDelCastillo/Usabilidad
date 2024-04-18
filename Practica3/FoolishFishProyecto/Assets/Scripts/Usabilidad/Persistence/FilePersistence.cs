@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 
 public class FilePersistence : IPersistence {
+	//Guardar el evento sin serializar
 	private Queue<string> eventQueue = new Queue<string>();
 
 	public void Send(TrackerEvent trackerEvent, ISerializer serializerObject, bool persistImmediately) {
@@ -39,6 +40,7 @@ public class FilePersistence : IPersistence {
 		FileInfo fileInfo = new FileInfo(filePath);
 		using (StreamWriter streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))) {
 			switch (fileFormat) {
+				//ILEGAL mover al serializerobject
 				case ".json": {
 					if (doesFileExist) {
 						//Sustituimos el ultimo corchete por una coma

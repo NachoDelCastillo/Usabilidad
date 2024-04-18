@@ -61,9 +61,10 @@ public abstract class TrackerEvent
         return string.Format("\n{0},{1},{2},{3}", gameVersion, userId, eventType, timeStamp.ToString(CultureInfo.InvariantCulture));
     }
 
-
+    //No virtual
     public virtual string ToJSON()
     {
+        //Poner aqui las llaves y llamar a un metodo virtual completaparameters()
         return string.Format(
             "\t\"gameVersion\": \"{0}\",\n" +
             "\t\"userID\": \"{1}\",\n" +
