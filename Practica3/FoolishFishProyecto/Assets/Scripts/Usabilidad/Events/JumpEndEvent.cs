@@ -12,10 +12,8 @@ public class JumpEndEvent : TrackerEvent
         return base.ToCSV() + string.Format(",{0}", platformId);
     }
 
-    public override string ToJSON() {
-		return base.ToJSON() + ",\n" +
-            string.Format(
-			"\t\"platformId\": {0}\n",
-			platformId);
-	}
+    protected override string CompleteParameters()
+    {
+        return ",\n" + string.Format( "\t\"platformId\": {0}\n", platformId);
+    }
 }
