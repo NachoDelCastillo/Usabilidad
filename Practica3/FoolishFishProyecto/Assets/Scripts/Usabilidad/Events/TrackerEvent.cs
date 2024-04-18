@@ -66,7 +66,7 @@ public abstract class TrackerEvent
     {
         string returnValue = 
             
-            "{"
+            "{\n"
 
             + string.Format(
             "\t\"gameVersion\": \"{0}\",\n" +
@@ -81,5 +81,5 @@ public abstract class TrackerEvent
     }
 
     protected virtual string CompleteParameters()
-    {  return ""; }
+    {  return "\n"; }
 }
