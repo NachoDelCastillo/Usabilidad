@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading;
 
 public class FilePersistence : IPersistence {
 	ISerializer serializerObject;
@@ -8,7 +9,11 @@ public class FilePersistence : IPersistence {
 	string filePath;
 	StreamWriter streamWriter;
 
-	public FilePersistence(ISerializer serializerObject) {
+    private Thread persistenceThread;
+	private bool firstEvent;
+	private bool doesFileExist;
+
+    public FilePersistence(ISerializer serializerObject) {
 		this.serializerObject = serializerObject;
 		eventQueue = new Queue<TrackerEvent>();
 
@@ -16,26 +21,22 @@ public class FilePersistence : IPersistence {
 		filePath = Application.persistentDataPath + "/events" + fileFormat;
 
 		//Crear el archivo de eventos o añadir al que ya existe
-		bool doesFileExist = File.Exists(filePath);
+		doesFileExist = File.Exists(filePath);
 		FileInfo fileInfo = new FileInfo(filePath);
 		streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite));
+
+		firstEvent = true;
 
 		if(!doesFileExist)
 			streamWriter.Write(serializerObject.Header());
 		else
-			streamWriter.BaseStream.Seek(serializerObject.SeekEndOffset(), SeekOrigin.Begin);
-	}
-
-	~FilePersistence() {
-		streamWriter.Write(serializerObject.EndOfFile());
-
-		streamWriter.Close();
+			streamWriter.BaseStream.Seek(serializerObject.SeekEndOffset(), SeekOrigin.End);
 	}
 
 	public void Send(TrackerEvent trackerEvent, bool persistImmediately) {
 
 		if (persistImmediately) {
-			PersistEvent(trackerEvent);
+            PersistInmediatly(trackerEvent);
 			Debug.Log("Evento persistido: " + trackerEvent.Type());
 		}
 		else {
@@ -45,21 +46,66 @@ public class FilePersistence : IPersistence {
 	}
 
 	public void Flush() {
-		int enqueuedEvents = eventQueue.Count;
-		while (eventQueue.Count > 0) {
-			PersistEvent(eventQueue.Dequeue());
-		}
-		Debug.Log("Persistidos " + enqueuedEvents + " eventos de la cola.");
-	}
+        if (persistenceThread != null && persistenceThread.IsAlive)
+        {
+            persistenceThread.Join();
+        }
+
+        persistenceThread = new Thread(new ThreadStart(ThreadPersistEvents));
+
+		persistenceThread.Start();
+    }
 
 	void PersistEvent(TrackerEvent trackerEvent) {
 		//Escribir en el fichero
-		streamWriter.Write(serializerObject.Prefix());
+		streamWriter.Write(serializerObject.Prefix(firstEvent && !doesFileExist));
 		streamWriter.Write(serializerObject.Serialize(trackerEvent));
 		streamWriter.Write(serializerObject.Suffix());
+
+		firstEvent = false;
 	}
 
 	public void SetSerializerObject(ISerializer serializerObject) {
 		this.serializerObject = serializerObject;
 	}
+
+	private void ThreadPersistEvents()
+	{
+        int enqueuedEvents = eventQueue.Count;
+        while (eventQueue.Count > 0)
+        {
+            PersistEvent(eventQueue.Dequeue());
+        }
+        Debug.Log("Persistidos " + enqueuedEvents + " eventos de la cola.");
+    }
+
+	private void PersistInmediatly(TrackerEvent trackerEvent)
+	{
+        if (persistenceThread != null && persistenceThread.IsAlive)
+        {
+            persistenceThread.Join();
+        }
+
+        persistenceThread = new Thread(new ParameterizedThreadStart(ThreadPersistEvent));
+
+        persistenceThread.Start(trackerEvent);
+    }
+
+	private void ThreadPersistEvent(object trackerEvent)
+	{
+        TrackerEvent _event = (TrackerEvent) trackerEvent;
+		PersistEvent(_event);
+    }
+
+    public void Close()
+    {
+        if (persistenceThread != null && persistenceThread.IsAlive)
+        {
+            persistenceThread.Join();
+        }
+
+        streamWriter.Write(serializerObject.EndOfFile());
+
+        streamWriter.Close();
+    }
 }

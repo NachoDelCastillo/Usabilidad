@@ -20,7 +20,7 @@ public class CSVSerializer : ISerializer
 		return "gameVersion,userID,eventType,timeStamp,arg1";
 	}
 
-	string ISerializer.Prefix() {
+	string ISerializer.Prefix(bool firstEvent) {
 		return string.Empty;
 	}
 

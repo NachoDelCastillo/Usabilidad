@@ -4,4 +4,6 @@ public interface IPersistence
     public void Flush();
 
     public void SetSerializerObject(ISerializer serializerObject);
+
+    public void Close();
 }

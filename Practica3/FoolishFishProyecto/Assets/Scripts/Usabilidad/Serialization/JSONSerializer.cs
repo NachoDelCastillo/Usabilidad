@@ -18,8 +18,8 @@ public class JSONSerializer : ISerializer
 		return "[";
 	}
 
-	string ISerializer.Prefix() {
-		return ",\n";
+	string ISerializer.Prefix(bool firstEvent) {
+		return firstEvent ? string.Empty : ",\n";
 	}
 
 	string ISerializer.Suffix() {

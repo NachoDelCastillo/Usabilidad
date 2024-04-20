@@ -81,6 +81,8 @@ public class Tracker : MonoBehaviour
         TrackEvent(new SessionEndEvent());
 
         FlushEvents();
+
+        CloseFile();
 	}
 
     public void TrackEvent(TrackerEvent trackerEvent)
@@ -96,5 +98,10 @@ public class Tracker : MonoBehaviour
     public void FlushEvents() {
 		persistenceObject.Flush();
 	}
+
+    private void CloseFile()
+    {
+        persistenceObject.Close();
+    }
     #endregion // endregion Methods
 }

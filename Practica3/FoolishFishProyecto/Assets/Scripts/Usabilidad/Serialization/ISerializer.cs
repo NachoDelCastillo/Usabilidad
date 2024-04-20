@@ -6,7 +6,7 @@ public interface ISerializer
 
     public abstract string getFormat();
 	string Header();
-	string Prefix();
+	string Prefix(bool firstEvent);
 	string Suffix();
 	string EndOfFile();
 

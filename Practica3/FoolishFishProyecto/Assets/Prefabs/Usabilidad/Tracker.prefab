@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   serializerType: 0
   persistenceType: 0
-  persistImmediately: 1
+  persistImmediately: 0
   generalTracker: 1
   fishMovementTracker: 1
