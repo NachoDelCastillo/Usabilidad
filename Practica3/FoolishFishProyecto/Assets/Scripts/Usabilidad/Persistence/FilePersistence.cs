@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Collections.Concurrent;
 
 public class FilePersistence : IPersistence {
 	ISerializer serializerObject;
-	Queue<TrackerEvent> eventQueue;
+	ConcurrentQueue<TrackerEvent> eventQueue;
 	string filePath;
 	StreamWriter streamWriter;
 
@@ -15,7 +16,7 @@ public class FilePersistence : IPersistence {
 
     public FilePersistence(ISerializer serializerObject) {
 		this.serializerObject = serializerObject;
-		eventQueue = new Queue<TrackerEvent>();
+		eventQueue = new ConcurrentQueue<TrackerEvent>();
 
 		string fileFormat = serializerObject.getFormat();
 		filePath = Application.persistentDataPath + "/events" + fileFormat;
@@ -62,6 +63,8 @@ public class FilePersistence : IPersistence {
 		streamWriter.Write(serializerObject.Serialize(trackerEvent));
 		streamWriter.Write(serializerObject.Suffix());
 
+		streamWriter.Flush();
+
 		firstEvent = false;
 	}
 
@@ -74,7 +77,12 @@ public class FilePersistence : IPersistence {
         int enqueuedEvents = eventQueue.Count;
         while (eventQueue.Count > 0)
         {
-            PersistEvent(eventQueue.Dequeue());
+			TrackerEvent _event;
+			bool ret = eventQueue.TryDequeue(out _event);
+			if (ret)
+            {
+				PersistEvent(_event);
+            }
         }
         Debug.Log("Persistidos " + enqueuedEvents + " eventos de la cola.");
     }
