@@ -29,7 +29,8 @@ public class TutorialTriggerParable : MonoBehaviour
         arrow_performed = false;
         rb = player.GetComponent<Rigidbody2D>();
         image = GetComponentInChildren<SpriteRenderer>();
-        image.enabled = false;
+        if (image != null)
+            image.enabled = false;
     }
 
     // Update is called once per frame
@@ -56,7 +57,7 @@ public class TutorialTriggerParable : MonoBehaviour
                     pos.Add(trajectory[i]);
             }
             int tam = pos.Count - 1;
-            if(tam > 0)
+            if (tam > 0)
             {
                 lr.positionCount = tam;
                 Vector3[] positions = new Vector3[tam];
@@ -72,7 +73,7 @@ public class TutorialTriggerParable : MonoBehaviour
                     arrow_performed = true;
                 }
             }
-            
+
         }
     }
 
@@ -84,7 +85,7 @@ public class TutorialTriggerParable : MonoBehaviour
             arrow_performed = false;
             if (image != null)
                 image.enabled = false;
-            if(arrow != null)
+            if (arrow != null)
                 Destroy(arrow.gameObject);
         }
     }

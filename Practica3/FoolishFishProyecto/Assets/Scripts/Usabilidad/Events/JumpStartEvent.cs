@@ -1,10 +1,16 @@
+using UnityEngine;
+
 public class JumpStartEvent : TrackerEvent
 {
     int platformId;
+    Vector2 mousePos;
 
-    public JumpStartEvent(int platformId): base(EventType.JUMP_START)
+    public JumpStartEvent(int platformId, Vector2 mousePos): base(EventType.JUMP_START)
     {
         this.platformId = platformId;
+        this.mousePos = mousePos;
+
+        Debug.Log("mousePosX = " + mousePos.x + " // mousePosY = " + mousePos.y);
     }
 
     public JumpStartEvent(string gameVersion, string userId, int platformId, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
@@ -19,7 +25,16 @@ public class JumpStartEvent : TrackerEvent
 
     protected override string CompleteParameters()
     {
-        return ",\n" + string.Format( "\t\"platformId\": {0}\n", platformId);
+        string mousePosX = mousePos.x.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+        string mousePosY = mousePos.y.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+
+        return ",\n" + string.Format(
+
+            "\t \"platformId\": {0} ," + "\n" +
+            "\t \"mousePosX\": {1} , " + "\n" +
+            "\t \"mousePosY\": {2} \n"
+
+            , platformId, mousePosX, mousePosY);
     }
 
     public int getPlatformId()

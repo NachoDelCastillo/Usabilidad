@@ -9,7 +9,7 @@ public class TestSerializer : MonoBehaviour
 
     void Start()
     {
-		JumpStartEvent trackerEvent = new JumpStartEvent(1);
+		JumpStartEvent trackerEvent = new JumpStartEvent(1, new Vector2(20, 20));
 
         Debug.Log(CSVSerializer.Serialize(trackerEvent));
     }

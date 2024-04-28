@@ -486,7 +486,7 @@ public class FishMovement : MonoBehaviour
         if (!onGround && !onLeftWall && !onRightWall)
         {
             //currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped);
+            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped, jumpLastMousePos);
             Tracker.Instance.TrackEvent(trackerEvent);
 
             Debug.Log("JUMP FROM " + currentPlatformWhenJumped);
