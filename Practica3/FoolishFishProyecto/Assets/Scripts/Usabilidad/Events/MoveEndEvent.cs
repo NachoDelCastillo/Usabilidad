@@ -4,6 +4,10 @@ public class MoveEndEvent : TrackerEvent
     {
     }
 
+    public MoveEndEvent(string gameVersion, string userId, double timeStamp) : base(gameVersion, userId, EventType.MOVE_END, timeStamp)
+    {
+    }
+
     public override string ToCSV()
     {
 		return base.ToCSV() + ",";

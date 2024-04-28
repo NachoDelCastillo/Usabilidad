@@ -37,6 +37,16 @@ public abstract class TrackerEvent
         timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
     }
 
+    protected TrackerEvent(string gameVesion, string userId, EventType eventType, double timeStamp)
+    {
+        this.gameVersion = Application.version;
+        this.userId = GenerateUserId();
+        this.eventType = eventType;
+
+        //Segundos que han pasado desde el 1/1/1970)
+        this.timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
+    }
+
     private string GenerateUserId()
     {
         string uniqueAttribute = SystemInfo.deviceUniqueIdentifier;
@@ -82,4 +92,9 @@ public abstract class TrackerEvent
 
     protected virtual string CompleteParameters()
     {  return "\n"; }
+
+    public double getTimeStamp()
+    {
+        return timeStamp;
+    }
 }

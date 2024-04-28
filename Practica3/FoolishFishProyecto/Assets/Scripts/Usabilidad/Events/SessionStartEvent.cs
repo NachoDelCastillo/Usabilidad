@@ -9,6 +9,10 @@ public class SessionStartEvent : TrackerEvent
         
     }
 
+    public SessionStartEvent(string gameVersion, string userId, double timeStamp) : base(gameVersion, userId, EventType.SESSION_START, timeStamp)
+    {
+    }
+
     public override string ToCSV()
     {
         return base.ToCSV() + ",";

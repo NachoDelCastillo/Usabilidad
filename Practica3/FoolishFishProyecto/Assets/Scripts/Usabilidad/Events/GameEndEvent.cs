@@ -9,6 +9,11 @@ public class GameEndEvent : TrackerEvent
         this.gameCompleted = gameCompleted;
     }
 
+    public GameEndEvent(string gameVersion, string userId, bool gameCompleted, double timeStamp) : base(gameVersion, userId, EventType.GAME_END, timeStamp)
+    {
+        this.gameCompleted = gameCompleted;
+    }
+
     public override string ToCSV()
     {
         return base.ToCSV() + string.Format(",{0}", gameCompleted);
@@ -17,5 +22,10 @@ public class GameEndEvent : TrackerEvent
     protected override string CompleteParameters()
     {
         return ",\n" + string.Format("\t\"gameCompleted\": {0}\n", gameCompleted.ToString().ToLower());
+    }
+
+    public bool getGameCompleted()
+    {
+        return gameCompleted;
     }
 }
