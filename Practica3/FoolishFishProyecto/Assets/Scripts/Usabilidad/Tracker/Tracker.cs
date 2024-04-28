@@ -46,10 +46,11 @@ public class Tracker : MonoBehaviour
     [Header("Active Trackers")]
     [SerializeField] bool generalTracker;
     [SerializeField] bool fishMovementTracker;
-	#endregion // endregion Properties
+    [SerializeField] bool recordTracker;
+    #endregion // endregion Properties
 
-	#region Methods
-	public void Init()
+    #region Methods
+    public void Init()
     {
         serializerObject = serializerType switch {
             SerializerType.JSON => new JSONSerializer(),
@@ -69,6 +70,10 @@ public class Tracker : MonoBehaviour
         }
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
+        }
+        if (recordTracker)
+        {
+            activeTrackers.Add(new RecordGameTrackerAsset());
         }
     }
 
