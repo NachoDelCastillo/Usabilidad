@@ -8,7 +8,7 @@ public class FishMovementTracker : ITrackerAsset {
 		return trackerEvent.Type() switch {
 			TrackerEvent.EventType.JUMP_START => true,
 			TrackerEvent.EventType.JUMP_END => true,
-			TrackerEvent.EventType.PLAYER_MOVE => true,
+			TrackerEvent.EventType.MOVE_START => true,
 			_ => false
 		};
 	}

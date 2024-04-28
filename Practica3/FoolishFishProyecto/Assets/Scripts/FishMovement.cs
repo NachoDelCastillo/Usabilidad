@@ -98,8 +98,6 @@ public class FishMovement : MonoBehaviour
     GameObject dustSystem;
     Vector3 jumpLastMousePos= new Vector3();
 
-    PlayerMoveEvent playerMoveEvent;
-
     public void OnEnable()
     {
         if (inputActions == null)
@@ -136,11 +134,20 @@ public class FishMovement : MonoBehaviour
     }
 
     public void SendMoveEvent(InputAction.CallbackContext obj) {
-        if (movementInput.sqrMagnitude > 0.01 && (onLeftWall || onRightWall || onGround)) {
-            // send event
-            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-			playerMoveEvent = new PlayerMoveEvent(currentPlatform);
-			Tracker.Instance.TrackEvent(playerMoveEvent);
+		if (movementInput.sqrMagnitude > 0.01) {
+			if (onLeftWall || onRightWall) {
+				MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ? 
+                    MoveStartEvent.MoveDirection.UP : MoveStartEvent.MoveDirection.DOWN);
+				Tracker.Instance.TrackEvent(moveStartEvent);
+			}
+            else if (onGround) {
+				MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
+					MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
+				Tracker.Instance.TrackEvent(moveStartEvent);
+			}
+		}
+		else {
+			Tracker.Instance.TrackEvent(new MoveEndEvent());
 		}
     }
 

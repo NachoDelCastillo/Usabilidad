@@ -14,7 +14,7 @@ public abstract class TrackerEvent
         SESSION_START, SESSION_END,
         GAME_START, GAME_END,
         JUMP_START, JUMP_END,
-        PLAYER_MOVE
+        MOVE_START, MOVE_END
     };
 
     //Parametros comunes
