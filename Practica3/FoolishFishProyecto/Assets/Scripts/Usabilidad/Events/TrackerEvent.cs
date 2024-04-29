@@ -44,7 +44,7 @@ public abstract class TrackerEvent
         this.eventType = eventType;
 
         //Segundos que han pasado desde el 1/1/1970)
-        this.timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
+        this.timeStamp = timeStamp;
     }
 
     private string GenerateUserId()
@@ -97,4 +97,6 @@ public abstract class TrackerEvent
     {
         return timeStamp;
     }
+
+    public EventType GetEventType() { return eventType; }
 }

@@ -46,25 +46,28 @@ public class infoRecordered : MonoBehaviour
 
             EventBase[] events = ZVJson.FromJson<EventBase>(jsonContent, true);
 
+            double timeStampGameStart = 0;
+
             foreach (EventBase event_ in events)
             {
 
                 string gameVersion = event_.gameVersion;
                 string userID = event_.userID;
-                double timeStamp = event_.timeStamp;
+                double timeStamp = event_.timeStamp - timeStampGameStart;
 
                 TrackerEvent trackerEvent = null;
 
                 switch (event_.eventType)
                 {
                     case "SESSION_START":
-                        trackerEvent = new SessionStartEvent(gameVersion, userID, timeStamp);
+                        trackerEvent = new SessionStartEvent(gameVersion, userID, 0);
                         break;
                     case "SESSION_END":
                         trackerEvent = new SessionEndEvent(gameVersion, userID, timeStamp);
                         break;
                     case "GAME_START":
-                        trackerEvent = new GameStartEvent(gameVersion, userID, timeStamp);
+                        trackerEvent = new GameStartEvent(gameVersion, userID, 0);
+                        timeStampGameStart = timeStamp;
                         break;
                     case "GAME_END":
                         trackerEvent = new GameEndEvent(gameVersion, userID, event_.gameCompleted ,timeStamp);
@@ -86,6 +89,8 @@ public class infoRecordered : MonoBehaviour
                 }
 
                 eventsQueue.Enqueue(trackerEvent);
+
+                if (event_.eventType == "GAME_END") break;
             }
 
             int i = 0;
@@ -99,5 +104,9 @@ public class infoRecordered : MonoBehaviour
     void Update()
     {
         
+
+
+
+
     }
 }
