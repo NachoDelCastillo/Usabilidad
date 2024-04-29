@@ -48602,6 +48602,7 @@ Transform:
   m_Father: {fileID: 22222878494811890}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: -40.17705, y: 112.45462, z: 3.3524013}
+      value: 12
 --- !u!1 &6948212712261326113
 GameObject:
   m_ObjectHideFlags: 0
