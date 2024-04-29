@@ -13,9 +13,10 @@ public class JumpStartEvent : TrackerEvent
         Debug.Log("mousePosX = " + mousePos.x + " // mousePosY = " + mousePos.y);
     }
 
-    public JumpStartEvent(string gameVersion, string userId, int platformId, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
+    public JumpStartEvent(string gameVersion, string userId, int platformId, Vector2 mousePos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
     {
         this.platformId = platformId;
+        this.mousePos = mousePos;
     }
 
     public override string ToCSV()
@@ -40,5 +41,10 @@ public class JumpStartEvent : TrackerEvent
     public int getPlatformId()
     {
         return platformId;
+    }
+
+    public Vector2 getMousePos()
+    {
+        return mousePos;
     }
 }
