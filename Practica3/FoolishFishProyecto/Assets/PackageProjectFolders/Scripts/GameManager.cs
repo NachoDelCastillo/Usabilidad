@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using static Cinemachine.DocumentationSortingAttribute;
 
 public class GameManager : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
             PlayerPrefs.DeleteAll();
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+
+            StartCoroutine(ChangeSceneCoroutine(2, "ReplayMenu"));
+        }
     }
 
     #region Change Scene
@@ -49,6 +56,8 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(ChangeSceneCoroutine(-1, sceneName));
         icon.gameObject.SetActive(true);
+
+
     }
 
     public void ChangeScene(int level)

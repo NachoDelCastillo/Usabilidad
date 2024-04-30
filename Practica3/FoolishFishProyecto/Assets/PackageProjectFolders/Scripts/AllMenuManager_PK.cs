@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using System;
+using UnityEngine.SceneManagement;
 
 public class AllMenuManager_PK : MonoBehaviour
 {
@@ -14,21 +15,31 @@ public class AllMenuManager_PK : MonoBehaviour
     float cameraDistanceX = 25;
     float cameraDistanceY = 15;
 
+    public bool mainmenu = false;
 
     // Referencias a todos los menus
     MainMenu_PK mainMenu;
     SettingsMenu_PK settingsMenu;
     LevelselectorMenu_PK levelSelectorMenu;
+    ReplayMenu_PK replayMenu_PK;
 
     private void Awake()
     {
-        mainMenu = FindObjectOfType<MainMenu_PK>();
-        settingsMenu = FindObjectOfType<SettingsMenu_PK>();
-        levelSelectorMenu = FindObjectOfType<LevelselectorMenu_PK>();
 
-        mainMenu.enabled = true;
-        settingsMenu.enabled = false;
-        levelSelectorMenu.enabled = false;
+        if (!mainmenu)
+        {
+            replayMenu_PK = FindObjectOfType<ReplayMenu_PK>();
+            replayMenu_PK.enabled = true;
+        }
+        else
+        {
+            mainMenu = FindObjectOfType<MainMenu_PK>();
+            settingsMenu = FindObjectOfType<SettingsMenu_PK>();
+            levelSelectorMenu = FindObjectOfType<LevelselectorMenu_PK>();
+            mainMenu.enabled = true;
+            settingsMenu.enabled = false;
+            levelSelectorMenu.enabled = false;
+        }
     }
 
 
@@ -113,6 +124,11 @@ public class AllMenuManager_PK : MonoBehaviour
         StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed / 2));
 
         cameraObj.DOMoveX(cameraDistanceX, cameraSpeed);
+    }
+
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     #endregion
