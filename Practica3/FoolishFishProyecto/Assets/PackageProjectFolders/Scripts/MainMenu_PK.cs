@@ -22,11 +22,13 @@ public class MainMenu_PK : MenuManager_PK
 			allMenuManager.PressPlay();
         }
         else if (index == 1)
+            allMenuManager.PressRecordGame();
+        else if (index == 2)
             allMenuManager.PressSettings();
         //else if (index == 2) allMenuManager.PressControls();
-        else if (index == 2)
-            allMenuManager.PressCredits();
         else if (index == 3)
+            allMenuManager.PressCredits();
+        else if (index == 4)
             PressQuit();
     }
 

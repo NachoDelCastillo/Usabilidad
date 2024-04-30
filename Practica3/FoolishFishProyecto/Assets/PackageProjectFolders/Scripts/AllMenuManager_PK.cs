@@ -73,6 +73,14 @@ public class AllMenuManager_PK : MonoBehaviour
         cameraObj.DOMoveY(-cameraDistanceY, cameraSpeed);
     }
 
+    public void PressRecordGame()
+    {
+        mainMenu.enabled = false;
+        StartCoroutine(EnableMenu(settingsMenu, true, cameraSpeed / 2));
+
+        cameraObj.DOMoveX(-cameraDistanceX, cameraSpeed);
+    }
+
     public void PressControls()
     {
         mainMenu.enabled = false;
@@ -98,6 +106,13 @@ public class AllMenuManager_PK : MonoBehaviour
         StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed/2));
 
         cameraObj.DOMoveY(0, cameraSpeed);
+    }
+
+    public void BackButtonRecorded()
+    {
+        StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed / 2));
+
+        cameraObj.DOMoveX(cameraDistanceX, cameraSpeed);
     }
 
     #endregion
