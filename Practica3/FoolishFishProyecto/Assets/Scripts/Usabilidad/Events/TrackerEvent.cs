@@ -99,4 +99,5 @@ public abstract class TrackerEvent
     }
 
     public EventType GetEventType() { return eventType; }
+    public string GetEventTypeString() { return eventType.ToString(); }
 }

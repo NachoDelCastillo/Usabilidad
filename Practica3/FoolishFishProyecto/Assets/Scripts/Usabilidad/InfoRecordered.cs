@@ -70,10 +70,10 @@ public class infoRecordered : MonoBehaviour
                         timeStampGameStart = timeStamp;
                         break;
                     case "GAME_END":
-                        trackerEvent = new GameEndEvent(gameVersion, userID, event_.gameCompleted ,timeStamp);
+                        trackerEvent = new GameEndEvent(gameVersion, userID, event_.gameCompleted, timeStamp);
                         break;
                     case "JUMP_START":
-                        trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId, 
+                        trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,
                             new Vector2(event_.mousePosX, event_.mousePosY), timeStamp);
                         break;
                     case "JUMP_END":
@@ -103,10 +103,41 @@ public class infoRecordered : MonoBehaviour
 
     void Update()
     {
-        
+        if (eventsQueue.Count > 0)
+        {
+            TrackerEvent nextEvent = eventsQueue.Peek(); // Obtener el primer evento de la cola sin quitarlo
 
+            // Obtener el tiempo actual del juego
+            double currentGameTime = Time.time;
 
+            // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
+            if (nextEvent.getTimeStamp() <= currentGameTime)
+            {
+                // Procesar el evento
+                ProcessEvent(eventsQueue.Dequeue()); // Quita y procesa el evento de la cola
+            }
+        }
+    }
 
-
+    void ProcessEvent(TrackerEvent trackerEvent)
+    {
+        switch (trackerEvent.GetEventTypeString())
+        {
+            case "GAME_END":
+                Debug.Log("GameEnd");
+                break;
+            case "JUMP_START":
+                Debug.Log("JumpStart");
+                break;
+            case "JUMP_END":
+                Debug.Log("JumpEnd");
+                break;
+            case "MOVE_START":
+                Debug.Log("MoveStart");
+                break;
+            case "MOVE_END":
+                Debug.Log("MoveEnd");
+                break;
+        }
     }
 }
