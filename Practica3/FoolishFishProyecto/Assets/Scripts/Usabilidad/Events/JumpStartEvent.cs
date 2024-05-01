@@ -59,6 +59,11 @@ public class JumpStartEvent : TrackerEvent
         return platformId;
     }
 
+    public Vector2 getPlayerPos()
+    {
+        return playerPos;
+    }
+
     public Vector2 getMousePos()
     {
         return mousePos;

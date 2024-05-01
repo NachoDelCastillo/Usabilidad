@@ -9,6 +9,8 @@ using UnityEngine.EventSystems;
 
 public class infoRecordered : MonoBehaviour
 {
+    // Devuelve true si se esta visualizando una repeticion de una partida
+    static public bool playingRecordedGame { private set; get; }
 
     Queue<TrackerEvent> eventsQueue;
     private const int INVALID = -1;
@@ -27,8 +29,16 @@ public class infoRecordered : MonoBehaviour
         public float mousePosY;
     }
 
+    // Referencias
+    // Referencia al script de movimiento del personaje principal
+    FishMovement fishMovement;
+
     void Start()
     {
+        // Debug
+        playingRecordedGame = true;
+        fishMovement = FindAnyObjectByType<FishMovement>();
+
         eventsQueue = new Queue<TrackerEvent>();
         readFile();
     }
@@ -124,19 +134,29 @@ public class infoRecordered : MonoBehaviour
         switch (trackerEvent.GetEventTypeString())
         {
             case "GAME_END":
-                Debug.Log("GameEnd");
+                Debug.Log("RecordedEvent : GameEnd");
                 break;
+
             case "JUMP_START":
-                Debug.Log("JumpStart");
+
+                Debug.Log("RecordedEvent : JumpStart");
+                JumpStartEvent jumpStartEvent = (JumpStartEvent)trackerEvent;
+                fishMovement.Process_JumpStartEvent(jumpStartEvent.getPlayerPos(), jumpStartEvent.getMousePos());
                 break;
+
             case "JUMP_END":
-                Debug.Log("JumpEnd");
+
+                Debug.Log("RecordedEvent : JumpEnd");
+                JumpEndEvent jumpEndEvent = (JumpEndEvent)trackerEvent;
+                fishMovement.Process_JumpEndEvent(jumpEndEvent.getPlayerPos());
                 break;
+
             case "MOVE_START":
-                Debug.Log("MoveStart");
+                Debug.Log("RecordedEvent : MoveStart");
                 break;
+
             case "MOVE_END":
-                Debug.Log("MoveEnd");
+                Debug.Log("RecordedEvent : MoveEnd");
                 break;
         }
     }

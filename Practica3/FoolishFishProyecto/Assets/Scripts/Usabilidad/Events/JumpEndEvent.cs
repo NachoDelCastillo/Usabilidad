@@ -44,4 +44,9 @@ public class JumpEndEvent : TrackerEvent
     {
         return platformId;
     }
+
+    public Vector2 getPlayerPos()
+    {
+        return playerPos;
+    }
 }

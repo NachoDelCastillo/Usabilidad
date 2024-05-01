@@ -10,6 +10,14 @@ using Random = UnityEngine.Random;
 
 public class FishMovement : MonoBehaviour
 {
+    // REPLAY GAMES LOGIC
+    // Almacena la posision del raton con la que se salto en la partida grabada en el archivo
+    Vector2 playerPos_recordedGame;
+    Vector2 mousePos_recordedGame;
+    bool jumpStart_recordedGame; // Devuelve true cuando se notifica a este script de un evento de StartJump
+
+
+
     [SerializeField]
     bool DEBUGGING;
 
@@ -355,46 +363,62 @@ public class FishMovement : MonoBehaviour
 
     void InputHandler()
     {
-        #region Movement
-        // Si se detecta que no se esta pulsando ninguna tecla
-        if (movementInput.x > -.1 && movementInput.x < .1)
-        {
-            // Sumar tiempo al timer
-            input_hor_notClicked_timer += Time.deltaTime;
 
-            // Si el timer llega a X segundos, informarlo con el bool input_hor_notClickedInXSec
-            if (input_hor_notClicked_timer > input_hor_notClicked_time)
-                WalkInputInactivity = true;
+        // Comprobar si se esta rejugando una partida grabada
+        if (infoRecordered.playingRecordedGame)
+        {
+            // En caso de que se este rejugando un partida grabada, desactivar controles
+
+            #region Movement
+            #endregion
+
+            #region Jump
+
+
+
+            #endregion
         }
-        // Resetear el timer
+
         else
         {
-            input_hor_notClicked_timer = 0;
-            WalkInputInactivity = false;
+            // En caso de que no se este rejugando un partida grabada, activar controles
+
+            #region Movement
+            // Si se detecta que no se esta pulsando ninguna tecla
+            if (movementInput.x > -.1 && movementInput.x < .1)
+            {
+                // Sumar tiempo al timer
+                input_hor_notClicked_timer += Time.deltaTime;
+
+                // Si el timer llega a X segundos, informarlo con el bool input_hor_notClickedInXSec
+                if (input_hor_notClicked_timer > input_hor_notClicked_time)
+                    WalkInputInactivity = true;
+            }
+            // Resetear el timer
+            else
+            {
+                input_hor_notClicked_timer = 0;
+                WalkInputInactivity = false;
+            }
+            anim.SetBool("WalkInputInactivity", WalkInputInactivity);
+            #endregion
+
+            #region Jump
+            // Si se puede saltar y se ha presionado saltar
+            if (jump_performed && !onAir && (onGround || onLeftWall || onRightWall) && !onJumpingAnimation)
+            {
+                onJumpingAnimation = true;
+
+                // Parar del todo el cuerpo
+                rb.velocity = Vector3.zero;
+
+                anim.SetTrigger("Jump");
+
+                currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
+                Invoke("CheckJumpSucceded", .5f);
+            }
+            #endregion
         }
-
-        anim.SetBool("WalkInputInactivity", WalkInputInactivity);
-
-        #endregion
-
-
-        #region Jump
-
-        // Si se puede saltar y se ha presionado saltar
-        if (jump_performed && !onAir && (onGround || onLeftWall || onRightWall) && !onJumpingAnimation)
-        {
-            onJumpingAnimation = true;
-
-            // Parar del todo el cuerpo
-            rb.velocity = Vector3.zero;
-
-            anim.SetTrigger("Jump");
-
-            currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
-            Invoke("CheckJumpSucceded", .5f);
-        }
-
-        #endregion
     }
 
     #region Jump
@@ -713,4 +737,24 @@ public class FishMovement : MonoBehaviour
     {
         return onAir;
     }
+
+
+
+
+    // METODOS RELACIONADOS CON LA IMPLEMENTACION DE REJUGABILIDAD
+
+    public void Process_JumpStartEvent(Vector2 playerPos, Vector2 mousePos)
+    {
+        // Asignar datos necesarios para el salto
+        jumpStart_recordedGame = true;
+
+        playerPos_recordedGame = playerPos;
+        mousePos_recordedGame = mousePos;
+    }
+
+    public void Process_JumpEndEvent(Vector2 playerPos)
+    {
+
+    }
+
 }
