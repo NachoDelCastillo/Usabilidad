@@ -27,6 +27,8 @@ public class infoRecordered : MonoBehaviour
         public bool gameCompleted = false;
         public float mousePosX;
         public float mousePosY;
+        public float playerPosX;
+        public float playerPosY;
     }
 
     // Referencias
@@ -84,10 +86,10 @@ public class infoRecordered : MonoBehaviour
                         break;
                     case "JUMP_START":
                         trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,
-                            new Vector2(event_.mousePosX, event_.mousePosY), timeStamp);
+                            new Vector2(event_.mousePosX, event_.mousePosY), new Vector2(event_.playerPosX, event_.playerPosY), timeStamp);
                         break;
                     case "JUMP_END":
-                        trackerEvent = new JumpEndEvent(gameVersion, userID, event_.platformId, timeStamp);
+                        trackerEvent = new JumpEndEvent(gameVersion, userID, event_.platformId, new Vector2(event_.playerPosX, event_.playerPosY), timeStamp);
                         break;
                     case "MOVE_START":
                         trackerEvent = new MoveStartEvent(gameVersion, userID, (MoveStartEvent.MoveDirection)event_.moveDirection, timeStamp);
@@ -102,8 +104,6 @@ public class infoRecordered : MonoBehaviour
 
                 if (event_.eventType == "GAME_END") break;
             }
-
-            int i = 0;
         }
         else
         {
@@ -115,7 +115,8 @@ public class infoRecordered : MonoBehaviour
     {
         if (eventsQueue.Count > 0)
         {
-            TrackerEvent nextEvent = eventsQueue.Peek(); // Obtener el primer evento de la cola sin quitarlo
+            // Obtener el primer evento de la cola sin quitarlo
+            TrackerEvent nextEvent = eventsQueue.Peek(); 
 
             // Obtener el tiempo actual del juego
             double currentGameTime = Time.time;
@@ -123,8 +124,8 @@ public class infoRecordered : MonoBehaviour
             // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
             if (nextEvent.getTimeStamp() <= currentGameTime)
             {
-                // Procesar el evento
-                ProcessEvent(eventsQueue.Dequeue()); // Quita y procesa el evento de la cola
+                // Procesar el evento y quitarlo de la cola
+                ProcessEvent(eventsQueue.Dequeue()); 
             }
         }
     }
@@ -135,6 +136,7 @@ public class infoRecordered : MonoBehaviour
         {
             case "GAME_END":
                 Debug.Log("RecordedEvent : GameEnd");
+                GameManager.GetInstance().ChangeScene("ReplayMenu");
                 break;
 
             case "JUMP_START":

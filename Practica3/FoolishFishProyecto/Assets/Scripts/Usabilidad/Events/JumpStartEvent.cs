@@ -18,10 +18,11 @@ public class JumpStartEvent : TrackerEvent
         Debug.Log("mousePosX = " + mousePos.x + " // mousePosY = " + mousePos.y);
     }
 
-    public JumpStartEvent(string gameVersion, string userId, int platformId, Vector2 mousePos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
+    public JumpStartEvent(string gameVersion, string userId, int platformId, Vector2 mousePos, Vector2 playerPos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
     {
         this.platformId = platformId;
         this.mousePos = mousePos;
+        this.playerPos = playerPos;
     }
 
     public override string ToCSV()

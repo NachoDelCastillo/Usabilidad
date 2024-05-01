@@ -23,17 +23,21 @@ public class PauseMenu_PK : MenuManager_PK
         if (index == 0) Unpause();
         if (index == 1)
         {
-			Tracker.Instance.TrackEvent(new GameEndEvent(false));
+			if (Tracker.Instance != null)
+                Tracker.Instance.TrackEvent(new GameEndEvent(false));
             Tracker.Instance.FlushEvents();
 
 			Unpause();
             GameManager.GetInstance().ChangeScene("Gameplay");
 
-			Tracker.Instance.TrackEvent(new GameStartEvent());
+			if (Tracker.Instance != null)
+                Tracker.Instance.TrackEvent(new GameStartEvent());
         }
         if (index == 2) {
-			Tracker.Instance.TrackEvent(new GameEndEvent(false));
-			Tracker.Instance.FlushEvents();
+			if (Tracker.Instance != null)
+                Tracker.Instance.TrackEvent(new GameEndEvent(false));
+            if (Tracker.Instance != null)
+                Tracker.Instance.FlushEvents();
 
 			Unpause(); 
             GameManager.GetInstance().ChangeScene("MainMenu_Scene"); 

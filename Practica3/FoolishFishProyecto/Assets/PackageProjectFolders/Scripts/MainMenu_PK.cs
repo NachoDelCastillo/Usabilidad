@@ -18,7 +18,7 @@ public class MainMenu_PK : MenuManager_PK
         base.buttonPressed(index);
 
         if (index == 0) {
-			Tracker.Instance.TrackEvent(new GameStartEvent());
+			if (Tracker.Instance != null) Tracker.Instance.TrackEvent(new GameStartEvent());
 			allMenuManager.PressPlay();
         }
         else if (index == 1)

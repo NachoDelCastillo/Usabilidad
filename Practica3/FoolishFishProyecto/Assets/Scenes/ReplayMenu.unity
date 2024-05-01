@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonGroup: {fileID: 5777973267518260853}
   buttonSelected: -1
+  replayGameObj: {fileID: 4480061245976392971, guid: b4b45e49be315154dba4115723c8b073, type: 3}
 --- !u!1001 &1704710635
 PrefabInstance:
   m_ObjectHideFlags: 0

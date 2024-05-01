@@ -13,9 +13,10 @@ public class JumpEndEvent : TrackerEvent
         this.playerPos = playerPos;
     }
 
-    public JumpEndEvent(string gameVersion, string userId, int platformId, double timeStamp) : base(gameVersion, userId, EventType.JUMP_END, timeStamp)
+    public JumpEndEvent(string gameVersion, string userId, int platformId, Vector2 playerPos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_END, timeStamp)
     {
         this.platformId = platformId;
+        this.playerPos = playerPos;
     }
 
     public override string ToCSV()

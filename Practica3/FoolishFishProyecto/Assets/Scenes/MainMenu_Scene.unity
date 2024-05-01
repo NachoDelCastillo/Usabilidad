@@ -8264,6 +8264,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tracker
       objectReference: {fileID: 0}
+    - target: {fileID: 8934834019723923709, guid: 9d6adcb563ba24741869d543bcf85f3b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -19517,6 +19521,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6978353851638597521, guid: b3aeff01bde96864eaf813a2a2969a91, type: 3}
+      propertyPath: replayGameObj
+      value: 
+      objectReference: {fileID: 4480061245976392971, guid: b4b45e49be315154dba4115723c8b073, type: 3}
     - target: {fileID: 7169805367069261835, guid: b3aeff01bde96864eaf813a2a2969a91, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

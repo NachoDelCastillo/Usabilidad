@@ -156,18 +156,18 @@ public class FishMovement : MonoBehaviour
             {
                 MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ?
                     MoveStartEvent.MoveDirection.UP : MoveStartEvent.MoveDirection.DOWN);
-                Tracker.Instance.TrackEvent(moveStartEvent);
+                if(Tracker.Instance != null)Tracker.Instance.TrackEvent(moveStartEvent);
             }
             else if (onGround)
             {
                 MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
                     MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
-                Tracker.Instance.TrackEvent(moveStartEvent);
+                if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
             }
         }
         else
         {
-            Tracker.Instance.TrackEvent(new MoveEndEvent());
+            if (Tracker.Instance != null) Tracker.Instance.TrackEvent(new MoveEndEvent());
         }
     }
 
@@ -562,7 +562,7 @@ public class FishMovement : MonoBehaviour
         {
             //currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
             JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped, transform.position, jumpLastMousePos);
-            Tracker.Instance.TrackEvent(trackerEvent);
+            if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
 
             Debug.Log("JUMP FROM " + currentPlatformWhenJumped);
         }
@@ -738,7 +738,8 @@ public class FishMovement : MonoBehaviour
 
         currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
         JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
-        Tracker.Instance.TrackEvent(trackerEvent);
+
+        if(Tracker.Instance != null)Tracker.Instance.TrackEvent(trackerEvent);
 
         Debug.Log("LAND FROM " + currentPlatform);
 
