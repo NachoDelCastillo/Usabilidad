@@ -11,12 +11,19 @@ using Random = UnityEngine.Random;
 public class FishMovement : MonoBehaviour
 {
     // REPLAY GAMES LOGIC
-    // Almacena la posision del raton con la que se salto en la partida grabada en el archivo
+    // Almacena la posision del raton con la que se salto en la partida grabada
     Vector2 playerPos_recordedGame;
+    // Almacena la posision del jugador desde la que se salto en la partida grabada
     Vector2 mousePos_recordedGame;
-    bool jumpStart_recordedGame; // Devuelve true cuando se notifica a este script de un evento de StartJump
+    // Devuelve true cuando se notifica a este script de un evento de StartJump
+    // Y vuelve a false cuando se realiza el salto correctamente
+    bool jumpStart_recordedGame;
+
+    // Tiempo que dura el reajuste en la posicion del jugador en momentos clave (Al iniciar un salto, al aterrizar, al empezar a moverse)
+    float positionCorrectionDuration = .5f;
 
 
+    /////////////////////////////////////////////////////////////////////////////////////////////
 
     [SerializeField]
     bool DEBUGGING;
@@ -66,7 +73,7 @@ public class FishMovement : MonoBehaviour
     bool onGround;
     float check_radius = .3f;
     bool onGround_Remember; // El estado de la variable onGround el frame anterior
-    
+
     // Wall checker
     [SerializeField] Transform leftWallCheck_tr;
     [SerializeField] Transform rightWallCheck_tr;
@@ -104,7 +111,7 @@ public class FishMovement : MonoBehaviour
 
     [SerializeField]
     GameObject dustSystem;
-    Vector3 jumpLastMousePos= new Vector3();
+    Vector3 jumpLastMousePos = new Vector3();
 
     public void OnEnable()
     {
@@ -113,8 +120,8 @@ public class FishMovement : MonoBehaviour
             inputActions = new PlayerControls();
             movementAction = inputActions.PlayerMovement.Movement;
 
-			movementAction.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
-			movementAction.performed += SendMoveEvent;
+            movementAction.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+            movementAction.performed += SendMoveEvent;
 
             inputActions.PlayerActions.Jump.performed += Jump_canceled;
             inputActions.PlayerActions.Jump.canceled += Jump_performed;
@@ -136,27 +143,32 @@ public class FishMovement : MonoBehaviour
     {
         if (!canJump)
             return;
-       
+
         jump_canceled = true;
         jump_hold = false;
     }
 
-    public void SendMoveEvent(InputAction.CallbackContext obj) {
-		if (movementInput.sqrMagnitude > 0.01) {
-			if (onLeftWall || onRightWall) {
-				MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ? 
+    public void SendMoveEvent(InputAction.CallbackContext obj)
+    {
+        if (movementInput.sqrMagnitude > 0.01)
+        {
+            if (onLeftWall || onRightWall)
+            {
+                MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ?
                     MoveStartEvent.MoveDirection.UP : MoveStartEvent.MoveDirection.DOWN);
-				Tracker.Instance.TrackEvent(moveStartEvent);
-			}
-            else if (onGround) {
-				MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
-					MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
-				Tracker.Instance.TrackEvent(moveStartEvent);
-			}
-		}
-		else {
-			Tracker.Instance.TrackEvent(new MoveEndEvent());
-		}
+                Tracker.Instance.TrackEvent(moveStartEvent);
+            }
+            else if (onGround)
+            {
+                MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
+                    MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
+                Tracker.Instance.TrackEvent(moveStartEvent);
+            }
+        }
+        else
+        {
+            Tracker.Instance.TrackEvent(new MoveEndEvent());
+        }
     }
 
     public void CanJumpNow()
@@ -225,13 +237,13 @@ public class FishMovement : MonoBehaviour
     void Update()
     {
         if (PauseMenu_PK.paused) return;
-        if(inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump) CreateTrayectory();
+        if (inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump) CreateTrayectory();
         InputHandler();
 
         if (onAir)
         {
             lr.enabled = false;
-            if(arrow!=null) DestroyArrow();
+            if (arrow != null) DestroyArrow();
             OnAir();
         }
 
@@ -252,7 +264,7 @@ public class FishMovement : MonoBehaviour
             // Debug.Log("NOT UNDERWATER");
             //bubblesSystem.gameObject.SetActive(false);
             bubblesSystem.Stop();
-            bubbles_performed=false;
+            bubbles_performed = false;
             thisFrameUnderWater = false;
         }
 
@@ -267,8 +279,8 @@ public class FishMovement : MonoBehaviour
                 rb.velocity = Vector3.zero;
                 xVelocityRemember = 0f;
                 float jumpDuration = 1.5f;
-                transform.DOJump(startingPosition.position, - 5, 1, jumpDuration);
-                rotatingPivot.DORotate(new Vector3(0, 0, 720 + 180), 
+                transform.DOJump(startingPosition.position, -5, 1, jumpDuration);
+                rotatingPivot.DORotate(new Vector3(0, 0, 720 + 180),
                     jumpDuration + .3f, RotateMode.FastBeyond360);
                 rb.isKinematic = true;
                 Invoke("JumpFinished", jumpDuration + .2f);
@@ -282,7 +294,7 @@ public class FishMovement : MonoBehaviour
     public void CreateTrayectory()
     {
         if (onAir) { return; }
-        Vector2 velocity = (Vector2)Calculador.calcular(transform,mouseTarget.position);
+        Vector2 velocity = (Vector2)Calculador.calcular(transform, mouseTarget.position);
 
         if (velocity == Vector2.zero)
         {
@@ -363,7 +375,6 @@ public class FishMovement : MonoBehaviour
 
     void InputHandler()
     {
-
         // Comprobar si se esta rejugando una partida grabada
         if (infoRecordered.playingRecordedGame)
         {
@@ -374,7 +385,18 @@ public class FishMovement : MonoBehaviour
 
             #region Jump
 
+            // Comprobar si hay un evento de StartJump listo para ejecutarse
+            if (jumpStart_recordedGame)
+            {
+                jumpStart_recordedGame = false;
 
+                // Mover al personaje, a la posicion exacta desde la que se salta en la partida grabada
+                transform.DOKill();
+                transform.DOMove(playerPos_recordedGame, positionCorrectionDuration);
+
+                // Llamar a la funcion encargada de salto del personaje
+                SetJumpAnimations();
+            }
 
             #endregion
         }
@@ -407,31 +429,60 @@ public class FishMovement : MonoBehaviour
             // Si se puede saltar y se ha presionado saltar
             if (jump_performed && !onAir && (onGround || onLeftWall || onRightWall) && !onJumpingAnimation)
             {
-                onJumpingAnimation = true;
-
-                // Parar del todo el cuerpo
-                rb.velocity = Vector3.zero;
-
-                anim.SetTrigger("Jump");
-
-                currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
-                Invoke("CheckJumpSucceded", .5f);
+                SetJumpAnimations();
             }
             #endregion
         }
     }
 
+
     #region Jump
 
+    // Se encarga de notificar al animator del personaje que inicie la animacion de salto
+    void SetJumpAnimations()
+    {
+        onJumpingAnimation = true;
+
+        // Parar del todo el cuerpo
+        rb.velocity = Vector3.zero;
+
+        anim.SetTrigger("Jump");
+
+        currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
+
+        Invoke("CheckJumpSucceded", .5f);
+    }
+
     // Se llama cuando se activa el trigger en la animaci�n de salto del pez
-    public void JumpAnimationTrigger() {
+    public void JumpAnimationTrigger()
+    {
         onJumpingAnimation = false;
         Jump();
     }
 
     public void Jump()
     {
-        Vector3 vel = Calculador.calcular(transform, jumpLastMousePos);
+        Vector3 vel;
+
+        // Seleccionar la posicion del raton que se va a usar para calcular la parabola
+        Vector2 mousePos;
+
+        // Comprobar si se esta reproduciendo una partida grabada
+        if (infoRecordered.playingRecordedGame)
+        {
+            // Calcular la parabola con los valores de la partida grabada
+            mousePos = mousePos_recordedGame;
+        }
+        else
+        {
+            // Calcular la parabola con los valores del jugador que esta jugando
+            mousePos = jumpLastMousePos;
+        }
+
+        // Calcular la velocidad
+        vel = Calculador.calcular(transform, mousePos);
+
+
         if (vel == Vector3.zero)
         {
             anim.SetTrigger("Land");
@@ -754,7 +805,9 @@ public class FishMovement : MonoBehaviour
 
     public void Process_JumpEndEvent(Vector2 playerPos)
     {
-
+        // Mover al personaje, a la posicion exacta en la que aterrizo en la partida grabada
+        transform.DOKill();
+        transform.DOMove(playerPos, positionCorrectionDuration);
     }
 
 }
