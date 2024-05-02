@@ -155,10 +155,14 @@ public class infoRecordered : MonoBehaviour
 
             case "MOVE_START":
                 Debug.Log("RecordedEvent : MoveStart");
+                MoveStartEvent moveStartEvent = (MoveStartEvent)trackerEvent;
+                MoveStartEvent.MoveDirection moveDirection = moveStartEvent.getMoveDirection();
+                fishMovement.Process_MoveStartEvent(moveDirection);
                 break;
 
             case "MOVE_END":
                 Debug.Log("RecordedEvent : MoveEnd");
+                fishMovement.Process_MoveEndEvent();
                 break;
         }
     }

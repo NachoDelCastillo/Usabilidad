@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.DefaultInputActions;
 using Random = UnityEngine.Random;
@@ -18,6 +19,11 @@ public class FishMovement : MonoBehaviour
     // Devuelve true cuando se notifica a este script de un evento de StartJump
     // Y vuelve a false cuando se realiza el salto correctamente
     bool jumpStart_recordedGame;
+
+    MoveStartEvent.MoveDirection moveDirection_recorderedGame;
+
+    bool moveEnd_recordedGame;  
+    bool moveStart_recordedGame;
 
     // Tiempo que dura el reajuste en la posicion del jugador en momentos clave (Al iniciar un salto, al aterrizar, al empezar a moverse)
     float positionCorrectionDuration = .5f;
@@ -381,6 +387,31 @@ public class FishMovement : MonoBehaviour
             // En caso de que se este rejugando un partida grabada, desactivar controles
 
             #region Movement
+            if(moveStart_recordedGame && !moveEnd_recordedGame)
+            {
+                switch (moveDirection_recorderedGame)
+                {
+                    case MoveStartEvent.MoveDirection.LEFT:
+                        movementInput.x = -1;
+                        break;
+                    case MoveStartEvent.MoveDirection.RIGHT:
+                        movementInput.x = 1;
+                        break;  
+                    case MoveStartEvent.MoveDirection.UP:
+                        movementInput.y = 1;
+                        break;
+                    case MoveStartEvent.MoveDirection.DOWN:
+                        movementInput.y = -1;
+                        break;
+
+                }
+            }
+            else
+            {
+                moveStart_recordedGame = false;
+                movementInput.x = 0;
+                movementInput.y = 0;
+            }
             #endregion
 
             #region Jump
@@ -809,6 +840,19 @@ public class FishMovement : MonoBehaviour
         // Mover al personaje, a la posicion exacta en la que aterrizo en la partida grabada
         transform.DOKill();
         transform.DOMove(playerPos, positionCorrectionDuration);
+    }
+
+    public void Process_MoveStartEvent(MoveStartEvent.MoveDirection moveDirection)
+    {
+        moveStart_recordedGame = true;
+        moveEnd_recordedGame= false;
+
+        moveDirection_recorderedGame= moveDirection;
+    }
+
+    public void Process_MoveEndEvent()
+    {
+        moveEnd_recordedGame= true;
     }
 
 }
