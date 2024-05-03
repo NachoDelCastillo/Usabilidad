@@ -26,8 +26,15 @@ public class FishMovement : MonoBehaviour
     bool moveStart_recordedGame;
 
     // Tiempo que dura el reajuste en la posicion del jugador en momentos clave (Al iniciar un salto, al aterrizar, al empezar a moverse)
-    float positionCorrectionDuration = .5f;
+    float positionCorrectionDuration = .1f;
 
+
+    // RECORD GAMES LOGIC
+    // Guarda el timestamp de cuando se pulso saltar con el raton, para despues enviar el evento cuando se haya confirmado el salto
+    float timeStampJumpStart = -1;
+
+    // Guarda la posicion del personaje cuando se pulso saltar con el raton, para despues enviar el evento cuando se haya confirmado el salto
+    Vector2 playerPosJumpStart;
 
     /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -140,7 +147,6 @@ public class FishMovement : MonoBehaviour
     {
         if (!canJump)
             return;
-        jumpLastMousePos = mouseTarget.position;
         jump_performed = true;
         jump_hold = true;
     }
@@ -422,6 +428,8 @@ public class FishMovement : MonoBehaviour
                 jumpStart_recordedGame = false;
 
                 // Mover al personaje, a la posicion exacta desde la que se salta en la partida grabada
+                transform.DOKill();
+                transform.DOMove(playerPos_recordedGame, positionCorrectionDuration);
 
                 // Llamar a la funcion encargada de salto del personaje
                 SetJumpAnimations();
@@ -459,6 +467,13 @@ public class FishMovement : MonoBehaviour
             if (jump_performed && !onAir && (onGround || onLeftWall || onRightWall) && !onJumpingAnimation)
             {
                 SetJumpAnimations();
+
+                // Registrar evento de salto
+                currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
+                JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped, transform.position, mouseTarget.position);
+                if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
+
+                jumpLastMousePos = mouseTarget.position;
             }
             #endregion
         }
@@ -476,8 +491,6 @@ public class FishMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
 
         anim.SetTrigger("Jump");
-
-        currentPlatformWhenJumped = PlatformObserver.Instance.GetCurrentFishPlatform();
 
         Invoke("CheckJumpSucceded", .5f);
     }
@@ -587,14 +600,14 @@ public class FishMovement : MonoBehaviour
 
     void CheckJumpSucceded()
     {
-        if (!onGround && !onLeftWall && !onRightWall)
-        {
-            //currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-            JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped, transform.position, jumpLastMousePos);
-            if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
+        //if (!onGround && !onLeftWall && !onRightWall)
+        //{
+        //    //currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+        //    JumpStartEvent trackerEvent = new JumpStartEvent(currentPlatformWhenJumped, transform.position, jumpLastMousePos);
+        //    if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
 
-            Debug.Log("JUMP FROM " + currentPlatformWhenJumped);
-        }
+        //    Debug.Log("JUMP FROM " + currentPlatformWhenJumped);
+        //}
     }
 
 
