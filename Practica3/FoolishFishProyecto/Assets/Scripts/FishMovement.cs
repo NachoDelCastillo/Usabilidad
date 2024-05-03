@@ -422,8 +422,6 @@ public class FishMovement : MonoBehaviour
                 jumpStart_recordedGame = false;
 
                 // Mover al personaje, a la posicion exacta desde la que se salta en la partida grabada
-                transform.DOKill();
-                transform.DOMove(playerPos_recordedGame, positionCorrectionDuration);
 
                 // Llamar a la funcion encargada de salto del personaje
                 SetJumpAnimations();
