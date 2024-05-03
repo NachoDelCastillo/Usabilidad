@@ -8,7 +8,7 @@ public class MainMenu_PK : MenuManager_PK
 
     AllMenuManager_PK allMenuManager;
 
-    protected override void ExtraAwake()
+	protected override void ExtraAwake()
     {
         allMenuManager = GetComponentInParent<AllMenuManager_PK>();
     }
@@ -21,8 +21,9 @@ public class MainMenu_PK : MenuManager_PK
 			if (Tracker.Instance != null) Tracker.Instance.TrackEvent(new GameStartEvent());
 			allMenuManager.PressPlay();
         }
-        else if (index == 1)
-            allMenuManager.PressRecordGame();
+        else if (index == 1) {
+			allMenuManager.PressRecordGame();
+		}
         else if (index == 2)
             allMenuManager.PressSettings();
         //else if (index == 2) allMenuManager.PressControls();

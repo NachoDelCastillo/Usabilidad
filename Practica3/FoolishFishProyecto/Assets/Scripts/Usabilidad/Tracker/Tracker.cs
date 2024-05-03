@@ -44,9 +44,9 @@ public class Tracker : MonoBehaviour
     [SerializeField] bool persistImmediately;
 
     [Header("Active Trackers")]
-    [SerializeField] bool generalTracker;
-    [SerializeField] bool fishMovementTracker;
-    [SerializeField] bool recordTracker;
+    public bool generalTracker;
+    public bool fishMovementTracker;
+    public bool recordTracker;
     #endregion // endregion Properties
 
     #region Methods

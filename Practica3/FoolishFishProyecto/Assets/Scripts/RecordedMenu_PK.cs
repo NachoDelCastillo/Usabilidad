@@ -9,7 +9,15 @@ public class RecordedMenu_PK : MenuManager_PK
     [SerializeField]
     GameObject replayGameObj;
 
-    protected override void ExtraAwake()
+	private void Start() {
+		if (Tracker.Instance != null) {
+			Tracker.Instance.generalTracker = true;
+			Tracker.Instance.fishMovementTracker = true;
+			Tracker.Instance.recordTracker = true;
+		}
+
+	}
+	protected override void ExtraAwake()
     {
         allMenuManager = GetComponentInParent<AllMenuManager_PK>();
     }
@@ -23,7 +31,13 @@ public class RecordedMenu_PK : MenuManager_PK
 
         if (index == 0)
         {
-            GameManager.GetInstance().ChangeScene("Gameplay");
+			if (Tracker.Instance != null) {
+				Tracker.Instance.generalTracker = false;
+				Tracker.Instance.fishMovementTracker = false;
+				Tracker.Instance.recordTracker = false;
+			}
+
+			GameManager.GetInstance().ChangeScene("Gameplay");
             replayGameObj.SetActive(true);
         }
         if (index == 1) allMenuManager.BackButtonRecorded();
