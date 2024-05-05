@@ -15,6 +15,8 @@ public class infoRecordered : MonoBehaviour
     Queue<TrackerEvent> eventsQueue;
     private const int INVALID = -1;
 
+    double timeStart, timeEnd;
+
     [Serializable]
     public class EventBase
     {
@@ -34,6 +36,8 @@ public class infoRecordered : MonoBehaviour
     // Referencias
     // Referencia al script de movimiento del personaje principal
     FishMovement fishMovement;
+    [SerializeField]
+    private GameObject progressBar;
 
     void Start()
     {
@@ -43,6 +47,8 @@ public class infoRecordered : MonoBehaviour
 
         eventsQueue = new Queue<TrackerEvent>();
         readFile();
+        progressBar.SetActive(true);
+        progressBar.GetComponentInChildren<ProgressBar>().MoveBar(timeEnd-timeStart);
     }
 
     void readFile()
@@ -73,6 +79,8 @@ public class infoRecordered : MonoBehaviour
                 {
                     case "SESSION_START":
                         trackerEvent = new SessionStartEvent(gameVersion, userID, 0);
+                        timeStart = event_.timeStamp;
+                        Debug.Log("TimeStart : " + timeStart);
                         break;
                     case "SESSION_END":
                         trackerEvent = new SessionEndEvent(gameVersion, userID, timeStamp);
@@ -83,6 +91,8 @@ public class infoRecordered : MonoBehaviour
                         break;
                     case "GAME_END":
                         trackerEvent = new GameEndEvent(gameVersion, userID, event_.gameCompleted, timeStamp);
+                        timeEnd = event_.timeStamp;
+                        Debug.Log("TimeEnd : " + timeEnd);
                         break;
                     case "JUMP_START":
                         trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,
