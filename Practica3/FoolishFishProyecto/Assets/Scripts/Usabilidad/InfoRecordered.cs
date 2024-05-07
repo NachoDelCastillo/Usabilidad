@@ -15,7 +15,7 @@ public class infoRecordered : MonoBehaviour
     Queue<TrackerEvent> eventsQueue;
     private const int INVALID = -1;
 
-    double timeStart, timeEnd;
+    double timeStart, timeEnd, offset;
 
     [Serializable]
     public class EventBase
@@ -47,8 +47,11 @@ public class infoRecordered : MonoBehaviour
 
         eventsQueue = new Queue<TrackerEvent>();
         readFile();
+
         progressBar.SetActive(true);
         progressBar.GetComponentInChildren<ProgressBar>().MoveBar(timeEnd-timeStart);
+
+        offset = Time.time;
     }
 
     void readFile()
@@ -128,8 +131,8 @@ public class infoRecordered : MonoBehaviour
             // Obtener el primer evento de la cola sin quitarlo
             TrackerEvent nextEvent = eventsQueue.Peek(); 
 
-            // Obtener el tiempo actual del juego
-            double currentGameTime = Time.time;
+            // Obtener el tiempo actual del juego   
+            double currentGameTime = Time.time - offset;
 
             // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
             if (nextEvent.getTimeStamp() <= currentGameTime)
