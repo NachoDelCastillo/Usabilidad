@@ -24,4 +24,9 @@ public class PauseRecordedGameplay : MonoBehaviour
             Time.timeScale = 1;
         }
     }
+
+    public bool IsPaused()
+    {
+        return paused;
+    }
 }
