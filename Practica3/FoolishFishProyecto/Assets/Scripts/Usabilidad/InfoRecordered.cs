@@ -49,7 +49,7 @@ public class infoRecordered : MonoBehaviour
         readFile();
 
         progressBar.SetActive(true);
-        progressBar.GetComponentInChildren<ProgressBar>().MoveBar(timeEnd-timeStart);
+        progressBar.GetComponentInChildren<ProgressBar>().MoveBar((float)(timeEnd-timeStart));
 
         offset = Time.time;
     }
