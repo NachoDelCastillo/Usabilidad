@@ -68,11 +68,17 @@ public class PauseMenu_PK : MenuManager_PK
     {
         // Sound
         //AudioManager_PK.GetInstance().Play("Pause", 1);
-        PauseRecordedGameplay pauseRecorededButton = GameObject.Find("Pause").GetComponent<PauseRecordedGameplay>();
-        if (pauseRecorededButton == null || (pauseRecorededButton && !pauseRecorededButton.IsPaused()))
+        GameObject pauseButton = GameObject.Find("Pause");
+        PauseRecordedGameplay pauseRecorededButton;
+        if (pauseButton != null)
         {
-            Time.timeScale = 1;
+            pauseRecorededButton = pauseButton.GetComponent<PauseRecordedGameplay>();
+            if (pauseRecorededButton == null || (pauseRecorededButton && !pauseRecorededButton.IsPaused()))
+            {
+                Time.timeScale = 1;
+            }
         }
+
 
         paused = false;
         //StopAllCoroutines();

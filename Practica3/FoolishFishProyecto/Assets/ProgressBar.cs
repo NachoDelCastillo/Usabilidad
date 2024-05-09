@@ -5,14 +5,21 @@ using DG.Tweening;
 
 public class ProgressBar : MonoBehaviour
 {
-    public void MoveBar(double time)
+
+
+    public void MoveBar(float time)
     {
 
-        transform.DOScale(1, (float)time);
+        transform.DOScale(1, time);
     }
 
     public void StopMovingBar()
     {
         transform.DOKill();
+    }
+
+    public void InstantiateJumpButton()
+    {
+
     }
 }

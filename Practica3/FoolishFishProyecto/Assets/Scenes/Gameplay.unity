@@ -2416,6 +2416,7 @@ GameObject:
   - component: {fileID: 368970768}
   - component: {fileID: 368970770}
   - component: {fileID: 368970769}
+  - component: {fileID: 368970771}
   m_Layer: 5
   m_Name: BG
   m_TagString: ProgressBar
@@ -2440,11 +2441,11 @@ RectTransform:
   m_Father: {fileID: 449489669}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 200, y: 200}
   m_SizeDelta: {x: 400, y: 10}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &368970769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2483,6 +2484,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 368970767}
   m_CullTransparentMesh: 1
+--- !u!114 &368970771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 368970767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c83e189f6f5dd4ba9593f8dda098d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonPrefab: {fileID: 130845662322859394, guid: 06510c7c29639f14e9564e8893da4376, type: 3}
 --- !u!1 &386732631
 GameObject:
   m_ObjectHideFlags: 0
@@ -4293,7 +4307,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 2.4999847, y: 0}
+  m_AnchoredPosition: {x: 2.5, y: 0}
   m_SizeDelta: {x: 395, y: 6}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &579388731

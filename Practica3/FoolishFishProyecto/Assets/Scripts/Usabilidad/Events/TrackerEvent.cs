@@ -22,6 +22,7 @@ public abstract class TrackerEvent
     string userId;
     protected EventType eventType;
     double timeStamp;
+    double localTimeStamp;
 
     public EventType Type() {
         return eventType;
@@ -33,6 +34,7 @@ public abstract class TrackerEvent
         userId = GenerateUserId();
         this.eventType = eventType;
 
+        localTimeStamp = Time.time;
         //Segundos que han pasado desde el 1/1/1970)
         timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
     }
@@ -82,8 +84,9 @@ public abstract class TrackerEvent
             "\t\"gameVersion\": \"{0}\",\n" +
             "\t\"userID\": \"{1}\",\n" +
             "\t\"eventType\": \"{2}\",\n" +
-            "\t\"timeStamp\": {3}",
-            gameVersion, userId, eventType.ToString(), timeStamp.ToString(CultureInfo.InvariantCulture))
+            "\t\"timeStamp\": {3},\n"+
+            "\t\"localTimeStamp\": {4}",
+            gameVersion, userId, eventType.ToString(), timeStamp.ToString(CultureInfo.InvariantCulture),localTimeStamp.ToString(CultureInfo.InvariantCulture))
 
             + CompleteParameters()
             + "}";
