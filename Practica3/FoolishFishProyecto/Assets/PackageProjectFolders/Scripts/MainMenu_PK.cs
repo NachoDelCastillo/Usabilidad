@@ -5,7 +5,6 @@ using DG.Tweening;
 
 public class MainMenu_PK : MenuManager_PK
 {
-
     AllMenuManager_PK allMenuManager;
 
 	protected override void ExtraAwake()

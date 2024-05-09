@@ -10,13 +10,9 @@ public class RecordedMenu_PK : MenuManager_PK
     GameObject replayGameObj;
 
 	private void Start() {
-		if (Tracker.Instance != null) {
-			Tracker.Instance.generalTracker = true;
-			Tracker.Instance.fishMovementTracker = true;
-			Tracker.Instance.recordTracker = true;
-		}
-
+	    Tracker.Instance.ReplayMode = false;
 	}
+
 	protected override void ExtraAwake()
     {
         allMenuManager = GetComponentInParent<AllMenuManager_PK>();
@@ -31,11 +27,7 @@ public class RecordedMenu_PK : MenuManager_PK
 
         if (index == 0)
         {
-			if (Tracker.Instance != null) {
-				Tracker.Instance.generalTracker = false;
-				Tracker.Instance.fishMovementTracker = false;
-				Tracker.Instance.recordTracker = false;
-			}
+            Tracker.Instance.ReplayMode = true;
 
 			GameManager.GetInstance().ChangeScene("Gameplay");
             replayGameObj.SetActive(true);

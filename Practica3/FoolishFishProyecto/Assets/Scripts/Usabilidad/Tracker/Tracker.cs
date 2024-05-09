@@ -44,9 +44,11 @@ public class Tracker : MonoBehaviour
     [SerializeField] bool persistImmediately;
 
     [Header("Active Trackers")]
-    public bool generalTracker;
-    public bool fishMovementTracker;
-    public bool recordTracker;
+    [SerializeField] bool generalTracker;
+    [SerializeField] bool fishMovementTracker;
+	[SerializeField] bool recordTracker;
+
+    public bool ReplayMode { get; set; } //El modo de replay deshabilita que se manden eventos
     #endregion // endregion Properties
 
     #region Methods
@@ -71,10 +73,11 @@ public class Tracker : MonoBehaviour
         if (fishMovementTracker) {
             activeTrackers.Add(new FishMovementTracker());
         }
-        if (recordTracker)
-        {
+        if (recordTracker) {
             activeTrackers.Add(new RecordGameTrackerAsset());
         }
+
+        ReplayMode = false;
     }
 
 	private void Start() {
@@ -92,6 +95,10 @@ public class Tracker : MonoBehaviour
 
     public void TrackEvent(TrackerEvent trackerEvent)
     {
+        if (ReplayMode) {
+            return;
+        }
+
         foreach (ITrackerAsset tracker in activeTrackers) {
             if (tracker.accept(trackerEvent)) {
                 persistenceObject.Send(trackerEvent, persistImmediately);
