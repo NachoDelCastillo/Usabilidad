@@ -249,7 +249,7 @@ public class FishMovement : MonoBehaviour
     void Update()
     {
         if (PauseMenu_PK.paused) return;
-        if (inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump) CreateTrayectory();
+        if (inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump && !infoRecordered.playingRecordedGame) CreateTrayectory();
         InputHandler();
 
         if (onAir)
