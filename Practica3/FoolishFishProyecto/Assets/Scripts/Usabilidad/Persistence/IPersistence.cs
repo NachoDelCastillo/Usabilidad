@@ -5,5 +5,6 @@ public interface IPersistence
 
     public void SetSerializerObject(ISerializer serializerObject);
 
+    public void Open();
     public void Close();
 }

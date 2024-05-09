@@ -18,4 +18,8 @@ public class ServerPersistence : IPersistence
     {
         throw new System.NotImplementedException();
     }
+
+	public void Open() {
+		throw new System.NotImplementedException();
+	}
 }

@@ -21,17 +21,9 @@ public class FilePersistence : IPersistence {
 		string fileFormat = serializerObject.getFormat();
 		filePath = Application.persistentDataPath + "/events" + fileFormat;
 
-		//Crear el archivo de eventos o añadir al que ya existe
-		doesFileExist = File.Exists(filePath);
-		FileInfo fileInfo = new FileInfo(filePath);
-		streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite));
-
 		firstEvent = true;
 
-		if(!doesFileExist)
-			streamWriter.Write(serializerObject.Header());
-		else
-			streamWriter.BaseStream.Seek(serializerObject.SeekEndOffset(), SeekOrigin.End);
+		Open();
 	}
 
 	public void Send(TrackerEvent trackerEvent, bool persistImmediately) {
@@ -105,7 +97,19 @@ public class FilePersistence : IPersistence {
 		PersistEvent(_event);
     }
 
-    public void Close()
+	public void Open() {
+		//Crear el archivo de eventos o añadir al que ya existe
+		doesFileExist = File.Exists(filePath);
+		FileInfo fileInfo = new FileInfo(filePath);
+		streamWriter = new(fileInfo.Open(FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite));
+
+		if (!doesFileExist)
+			streamWriter.Write(serializerObject.Header());
+		else
+			streamWriter.BaseStream.Seek(serializerObject.SeekEndOffset(), SeekOrigin.End);
+	}
+
+	public void Close()
     {
         if (persistenceThread != null && persistenceThread.IsAlive)
         {

@@ -48,7 +48,27 @@ public class Tracker : MonoBehaviour
     [SerializeField] bool fishMovementTracker;
 	[SerializeField] bool recordTracker;
 
-    public bool ReplayMode { get; set; } //El modo de replay deshabilita que se manden eventos
+    bool replayMode;
+	//El modo de replay deshabilita que se manden eventos
+	public bool ReplayMode { 
+        get {
+            return replayMode;
+        }
+        set {
+            if (replayMode == value) {
+                return;
+            }
+
+            replayMode = value;
+
+            if (replayMode) {
+				persistenceObject.Close();
+			}
+            else {
+                persistenceObject.Open();
+            }
+        }
+    }
     #endregion // endregion Properties
 
     #region Methods
@@ -86,6 +106,10 @@ public class Tracker : MonoBehaviour
 
 	private void OnDestroy()
     {
+        if (persistenceObject == null) {
+            return;
+        }
+            
         TrackEvent(new SessionEndEvent());
 
         FlushEvents();
