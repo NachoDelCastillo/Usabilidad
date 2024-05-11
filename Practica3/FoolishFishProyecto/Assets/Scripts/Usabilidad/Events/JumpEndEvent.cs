@@ -13,7 +13,9 @@ public class JumpEndEvent : TrackerEvent
         this.playerPos = playerPos;
     }
 
-    public JumpEndEvent(string gameVersion, string userId, int platformId, Vector2 playerPos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_END, timeStamp)
+    public JumpEndEvent(string gameVersion, string userId, int platformId, 
+        Vector2 playerPos, double timeStamp, double localTimeStamp) 
+        : base(gameVersion, userId, EventType.JUMP_END, timeStamp, localTimeStamp)
     {
         this.platformId = platformId;
         this.playerPos = playerPos;
@@ -31,11 +33,11 @@ public class JumpEndEvent : TrackerEvent
 
         return ",\n" + string.Format(
 
-            "\t \"platformId\": {0} ," + "\n" +
+            "\t \"platformId\": {0}," + "\n" +
 
             // Almacenar la posicion exacta desde la que el personaje ha saltado
-            "\t \"playerPosX\": {1} , " + "\n" +
-            "\t \"playerPosY\": {2} \n"
+            "\t \"playerPosX\": {1}," + "\n" +
+            "\t \"playerPosY\": {2}\n"
 
             , platformId,
             playerPosX, playerPosY);

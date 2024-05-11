@@ -249,7 +249,7 @@ public class FishMovement : MonoBehaviour
     void Update()
     {
         if (PauseMenu_PK.paused) return;
-        if (inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump && !infoRecordered.playingRecordedGame) CreateTrayectory();
+        if (inputActions.PlayerActions.ShowTrajectory.IsInProgress() && canJump && !InfoRecordered.playingRecordedGame) CreateTrayectory();
         InputHandler();
 
         if (onAir)
@@ -388,7 +388,7 @@ public class FishMovement : MonoBehaviour
     void InputHandler()
     {
         // Comprobar si se esta rejugando una partida grabada
-        if (infoRecordered.playingRecordedGame)
+        if (InfoRecordered.playingRecordedGame)
         {
             // En caso de que se este rejugando un partida grabada, desactivar controles
 
@@ -510,7 +510,7 @@ public class FishMovement : MonoBehaviour
         Vector2 mousePos;
 
         // Comprobar si se esta reproduciendo una partida grabada
-        if (infoRecordered.playingRecordedGame)
+        if (InfoRecordered.playingRecordedGame)
         {
             // Calcular la parabola con los valores de la partida grabada
             mousePos = mousePos_recordedGame;

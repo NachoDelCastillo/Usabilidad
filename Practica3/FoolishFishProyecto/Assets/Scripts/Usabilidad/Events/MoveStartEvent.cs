@@ -11,7 +11,9 @@ public class MoveStartEvent : TrackerEvent
         this.moveDirection = moveDirection;
     }
 
-    public MoveStartEvent(string gameVersion, string userId, MoveDirection moveDirection, double timeStamp) : base(gameVersion, userId, EventType.MOVE_START, timeStamp)
+    public MoveStartEvent(string gameVersion, string userId, MoveDirection moveDirection, 
+        double timeStamp, double localTimeStamp) 
+        : base(gameVersion, userId, EventType.MOVE_START, timeStamp, localTimeStamp)
     {
         this.moveDirection = moveDirection;
     }

@@ -18,7 +18,9 @@ public class JumpStartEvent : TrackerEvent
         Debug.Log("mousePosX = " + mousePos.x + " // mousePosY = " + mousePos.y);
     }
 
-    public JumpStartEvent(string gameVersion, string userId, int platformId, Vector2 mousePos, Vector2 playerPos, double timeStamp) : base(gameVersion, userId, EventType.JUMP_START, timeStamp)
+    public JumpStartEvent(string gameVersion, string userId, int platformId, Vector2 mousePos, 
+        Vector2 playerPos, double timeStamp, double localTimeStamp) 
+        : base(gameVersion, userId, EventType.JUMP_START, timeStamp, localTimeStamp)
     {
         this.platformId = platformId;
         this.mousePos = mousePos;
@@ -40,14 +42,14 @@ public class JumpStartEvent : TrackerEvent
 
         return ",\n" + string.Format(
 
-            "\t \"platformId\": {0} ," + "\n" +
+            "\t \"platformId\": {0}," + "\n" +
 
             // Almacenar la posicion exacta desde la que el personaje ha saltado
-            "\t \"playerPosX\": {1} , " + "\n" +
-            "\t \"playerPosY\": {2} , " + "\n" +
+            "\t \"playerPosX\": {1}," + "\n" +
+            "\t \"playerPosY\": {2}," + "\n" +
 
             // Almacenar la posicion del raton con la que se calcula la parabola
-            "\t \"mousePosX\": {3} , " + "\n" +
+            "\t \"mousePosX\": {3}," + "\n" +
             "\t \"mousePosY\": {4} \n"
 
             , platformId,

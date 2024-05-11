@@ -39,14 +39,14 @@ public abstract class TrackerEvent
         timeStamp = (DateTime.UtcNow - epochStart).TotalSeconds;
     }
 
-    protected TrackerEvent(string gameVesion, string userId, EventType eventType, double timeStamp)
+    protected TrackerEvent(string gameVesion, string userId, EventType eventType,
+        double timeStamp, double localTimeStamp)
     {
-        this.gameVersion = Application.version;
-        this.userId = GenerateUserId();
+        this.gameVersion = gameVesion;
+        this.userId = userId;
         this.eventType = eventType;
-
-        //Segundos que han pasado desde el 1/1/1970)
         this.timeStamp = timeStamp;
+        this.localTimeStamp = localTimeStamp;
     }
 
     private string GenerateUserId()
@@ -100,6 +100,8 @@ public abstract class TrackerEvent
     {
         return timeStamp;
     }
+
+    public double getLocalTimeStamp() => localTimeStamp;
 
     public EventType GetEventType() { return eventType; }
     public string GetEventTypeString() { return eventType.ToString(); }

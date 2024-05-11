@@ -5,10 +5,6 @@ public class SessionEndEvent : TrackerEvent
 
     }
 
-    public SessionEndEvent(string gameVersion, string userId, double timeStamp) : base(gameVersion, userId, EventType.SESSION_END, timeStamp)
-    {
-    }
-
     public override string ToCSV()
     {
         return base.ToCSV() + ",";
