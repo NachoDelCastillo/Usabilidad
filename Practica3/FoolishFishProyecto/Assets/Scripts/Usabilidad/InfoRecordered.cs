@@ -10,187 +10,209 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InfoRecordered : MonoBehaviour {
-	// Devuelve true si se esta visualizando una repeticion de una partida
-	static public bool playingRecordedGame { private set; get; }
+public class InfoRecordered : MonoBehaviour
+{
+    // Devuelve true si se esta visualizando una repeticion de una partida
+    static public bool playingRecordedGame { private set; get; }
 
-	Queue<TrackerEvent> eventsQueue;
-	private const int INVALID = -1;
+    Queue<TrackerEvent> eventsQueue;
+    private const int INVALID = -1;
 
-	double timeStart, timeEnd, offset;
+    double timeStart, timeEnd, offset;
 
-	[Serializable]
-	public class EventBase {
-		public string gameVersion;
-		public string userID;
-		public string eventType;
-		public double timeStamp;
-		public double localTimeStamp;
-		public int platformId = INVALID;
-		public int moveDirection = INVALID;
-		public bool gameCompleted = false;
-		public float mousePosX;
-		public float mousePosY;
-		public float playerPosX;
-		public float playerPosY;
-	}
+    [Serializable]
+    public class EventBase
+    {
+        public string gameVersion;
+        public string userID;
+        public string eventType;
+        public double timeStamp;
+        public double localTimeStamp;
+        public int platformId = INVALID;
+        public int moveDirection = INVALID;
+        public bool gameCompleted = false;
+        public float mousePosX;
+        public float mousePosY;
+        public float playerPosX;
+        public float playerPosY;
+    }
 
-	// Referencias
-	// Referencia al script de movimiento del personaje principal
-	FishMovement fishMovement;
-	[SerializeField]
-	private Slider progressBar;
-	[SerializeField] GameObject markerPrefab;
+    // Referencias
+    // Referencia al script de movimiento del personaje principal
+    FishMovement fishMovement;
+    [SerializeField]
+    private Slider progressBar;
+    [SerializeField] GameObject markerPrefab;
+    [SerializeField] GameObject flyingTimer;
 
-	void Start() {
-		if (!Tracker.Instance.ReplayMode) {
-			playingRecordedGame = false;
-			gameObject.SetActive(false);
-			progressBar.gameObject.SetActive(false);
-			return;
-		}
+    void Start()
+    {
+        if (!Tracker.Instance.ReplayMode)
+        {
+            playingRecordedGame = false;
+            gameObject.SetActive(false);
 
-		// Debug
-		playingRecordedGame = true;
-		fishMovement = FindAnyObjectByType<FishMovement>();
+            progressBar.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            flyingTimer.SetActive(false);
 
-		eventsQueue = new Queue<TrackerEvent>();
-		readFile();
+        }
 
-		progressBar.gameObject.SetActive(true);
-		progressBar.value = 0;
+        // Debug
+        playingRecordedGame = true;
+        fishMovement = FindAnyObjectByType<FishMovement>();
 
-		offset = Time.time;
-	}
+        eventsQueue = new Queue<TrackerEvent>();
+        readFile();
 
-	void readFile() {
-		// Ruta del archivo CSV en Application.persistentDataPath
-		string filePath = Path.Combine(Application.persistentDataPath, "events.json");
+        progressBar.gameObject.SetActive(true);
+        progressBar.value = 0;
 
-		// Verifica que el archivo exista antes de intentar leerlo
-		if (File.Exists(filePath)) {
-			// Lee el contenido del archivo JSON como una cadena
-			string jsonContent = File.ReadAllText(filePath);
+        offset = Time.time;
+    }
 
-			EventBase[] events = ZVJson.FromJson<EventBase>(jsonContent, true);
+    void readFile()
+    {
+        // Ruta del archivo CSV en Application.persistentDataPath
+        string filePath = Path.Combine(Application.persistentDataPath, "events.json");
 
-			foreach (EventBase event_ in events) {
-				string gameVersion = event_.gameVersion;
-				string userID = event_.userID;
-				double timeStamp = event_.timeStamp;
-				double localTimeStamp = event_.localTimeStamp;
+        // Verifica que el archivo exista antes de intentar leerlo
+        if (File.Exists(filePath))
+        {
+            // Lee el contenido del archivo JSON como una cadena
+            string jsonContent = File.ReadAllText(filePath);
 
-				TrackerEvent trackerEvent = null;
+            EventBase[] events = ZVJson.FromJson<EventBase>(jsonContent, true);
 
-				switch (event_.eventType) {
-					case "GAME_START":
-						timeStart = localTimeStamp;
-						break;
-					case "GAME_END":
-						timeEnd = localTimeStamp;
-						Debug.Log("TimeEnd : " + timeEnd);
-						break;
-					case "JUMP_START":
-						trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,
-							new Vector2(event_.mousePosX, event_.mousePosY),
-							new Vector2(event_.playerPosX, event_.playerPosY), timeStamp, localTimeStamp);
-						break;
-					case "JUMP_END":
-						trackerEvent = new JumpEndEvent(gameVersion, userID, event_.platformId,
-							new Vector2(event_.playerPosX, event_.playerPosY), timeStamp, localTimeStamp);
-						break;
-					case "MOVE_START":
-						trackerEvent = new MoveStartEvent(gameVersion, userID,
-							(MoveStartEvent.MoveDirection)event_.moveDirection, timeStamp, localTimeStamp);
-						break;
-					case "MOVE_END":
-						trackerEvent = new MoveEndEvent(gameVersion, userID, timeStamp, localTimeStamp);
-						break;
-					default:
-						continue;
-				}
+            foreach (EventBase event_ in events)
+            {
+                string gameVersion = event_.gameVersion;
+                string userID = event_.userID;
+                double timeStamp = event_.timeStamp;
+                double localTimeStamp = event_.localTimeStamp;
 
-				if (trackerEvent != null)
-					eventsQueue.Enqueue(trackerEvent);
+                TrackerEvent trackerEvent = null;
 
-				if (event_.eventType == "GAME_END")
-					break;
-			}
+                switch (event_.eventType)
+                {
+                    case "GAME_START":
+                        timeStart = localTimeStamp;
+                        break;
+                    case "GAME_END":
+                        timeEnd = localTimeStamp;
+                        Debug.Log("TimeEnd : " + timeEnd);
+                        break;
+                    case "JUMP_START":
+                        trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,
+                            new Vector2(event_.mousePosX, event_.mousePosY),
+                            new Vector2(event_.playerPosX, event_.playerPosY), timeStamp, localTimeStamp);
+                        break;
+                    case "JUMP_END":
+                        trackerEvent = new JumpEndEvent(gameVersion, userID, event_.platformId,
+                            new Vector2(event_.playerPosX, event_.playerPosY), timeStamp, localTimeStamp);
+                        break;
+                    case "MOVE_START":
+                        trackerEvent = new MoveStartEvent(gameVersion, userID,
+                            (MoveStartEvent.MoveDirection)event_.moveDirection, timeStamp, localTimeStamp);
+                        break;
+                    case "MOVE_END":
+                        trackerEvent = new MoveEndEvent(gameVersion, userID, timeStamp, localTimeStamp);
+                        break;
+                    default:
+                        continue;
+                }
 
-			foreach (TrackerEvent trackerEvent in eventsQueue) {
-				if (trackerEvent.Type() != TrackerEvent.EventType.JUMP_END)
-					continue;
+                if (trackerEvent != null)
+                    eventsQueue.Enqueue(trackerEvent);
 
-				Vector2 markerPosition = new Vector2((float)
-					((trackerEvent.getLocalTimeStamp() - timeStart) / timeEnd * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x, 0);
+                if (event_.eventType == "GAME_END")
+                    break;
+            }
 
-				Instantiate(markerPrefab, progressBar.transform)
-					.GetComponent<RectTransform>().anchoredPosition = markerPosition;
-			}
+            foreach (TrackerEvent trackerEvent in eventsQueue)
+            {
+                if (trackerEvent.Type() != TrackerEvent.EventType.JUMP_END)
+                    continue;
 
-			//for(int i = 0; i <= 10; i++) {
-			//	Vector2 markerPosition = new Vector2((float)
-			//		(((float) i / 10 * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x), 0);
+                Vector2 markerPosition = new Vector2((float)
+                    ((trackerEvent.getLocalTimeStamp() - timeStart) / timeEnd * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x, 0);
 
-			//	Instantiate(markerPrefab, progressBar.transform)
-			//		.GetComponent<RectTransform>().anchoredPosition = markerPosition;
-			//}
-		}
-		else {
-			Debug.LogWarning($"El archivo CSV no se encontró en la ruta: {filePath}");
-		}
-	}
+                Instantiate(markerPrefab, progressBar.transform)
+                    .GetComponent<RectTransform>().anchoredPosition = markerPosition;
+            }
 
-	void Update() {
-		progressBar.value = (float)((Time.time - offset) / timeEnd);
+            //for(int i = 0; i <= 10; i++) {
+            //	Vector2 markerPosition = new Vector2((float)
+            //		(((float) i / 10 * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x), 0);
 
-		if (eventsQueue.Count > 0) {
-			// Obtener el primer evento de la cola sin quitarlo
-			TrackerEvent nextEvent = eventsQueue.Peek();
+            //	Instantiate(markerPrefab, progressBar.transform)
+            //		.GetComponent<RectTransform>().anchoredPosition = markerPosition;
+            //}
+        }
+        else
+        {
+            Debug.LogWarning($"El archivo CSV no se encontró en la ruta: {filePath}");
+        }
+    }
 
-			// Obtener el tiempo actual del juego   
-			double currentGameTime = Time.time - offset;
+    void Update()
+    {
+        progressBar.value = (float)((Time.time - offset) / timeEnd);
 
-			// Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
-			if (nextEvent.getLocalTimeStamp() - timeStart <= currentGameTime) {
-				// Procesar el evento y quitarlo de la cola
-				ProcessEvent(eventsQueue.Dequeue());
-			}
-		}
-	}
+        if (eventsQueue.Count > 0)
+        {
+            // Obtener el primer evento de la cola sin quitarlo
+            TrackerEvent nextEvent = eventsQueue.Peek();
 
-	void ProcessEvent(TrackerEvent trackerEvent) {
-		switch (trackerEvent.GetEventTypeString()) {
-			case "GAME_END":
-				Debug.Log("RecordedEvent : GameEnd");
-				GameManager.GetInstance().ChangeScene("ReplayMenu");
-				break;
+            // Obtener el tiempo actual del juego   
+            double currentGameTime = Time.time - offset;
 
-			case "JUMP_START":
+            // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
+            if (nextEvent.getLocalTimeStamp() - timeStart <= currentGameTime)
+            {
+                // Procesar el evento y quitarlo de la cola
+                ProcessEvent(eventsQueue.Dequeue());
+            }
+        }
+    }
 
-				Debug.Log("RecordedEvent : JumpStart");
-				JumpStartEvent jumpStartEvent = (JumpStartEvent)trackerEvent;
-				fishMovement.Process_JumpStartEvent(jumpStartEvent.getPlayerPos(), jumpStartEvent.getMousePos());
-				break;
+    void ProcessEvent(TrackerEvent trackerEvent)
+    {
+        switch (trackerEvent.GetEventTypeString())
+        {
+            case "GAME_END":
+                Debug.Log("RecordedEvent : GameEnd");
+                GameManager.GetInstance().ChangeScene("ReplayMenu");
+                break;
 
-			case "JUMP_END":
+            case "JUMP_START":
 
-				Debug.Log("RecordedEvent : JumpEnd");
-				JumpEndEvent jumpEndEvent = (JumpEndEvent)trackerEvent;
-				fishMovement.Process_JumpEndEvent(jumpEndEvent.getPlayerPos());
-				break;
+                Debug.Log("RecordedEvent : JumpStart");
+                JumpStartEvent jumpStartEvent = (JumpStartEvent)trackerEvent;
+                fishMovement.Process_JumpStartEvent(jumpStartEvent.getPlayerPos(), jumpStartEvent.getMousePos());
+                break;
 
-			case "MOVE_START":
-				Debug.Log("RecordedEvent : MoveStart");
-				MoveStartEvent moveStartEvent = (MoveStartEvent)trackerEvent;
-				MoveStartEvent.MoveDirection moveDirection = moveStartEvent.getMoveDirection();
-				fishMovement.Process_MoveStartEvent(moveDirection);
-				break;
+            case "JUMP_END":
 
-			case "MOVE_END":
-				Debug.Log("RecordedEvent : MoveEnd");
-				fishMovement.Process_MoveEndEvent();
-				break;
-		}
-	}
+                Debug.Log("RecordedEvent : JumpEnd");
+                JumpEndEvent jumpEndEvent = (JumpEndEvent)trackerEvent;
+                fishMovement.Process_JumpEndEvent(jumpEndEvent.getPlayerPos());
+                break;
+
+            case "MOVE_START":
+                Debug.Log("RecordedEvent : MoveStart");
+                MoveStartEvent moveStartEvent = (MoveStartEvent)trackerEvent;
+                MoveStartEvent.MoveDirection moveDirection = moveStartEvent.getMoveDirection();
+                fishMovement.Process_MoveStartEvent(moveDirection);
+                break;
+
+            case "MOVE_END":
+                Debug.Log("RecordedEvent : MoveEnd");
+                fishMovement.Process_MoveEndEvent();
+                break;
+        }
+    }
 }

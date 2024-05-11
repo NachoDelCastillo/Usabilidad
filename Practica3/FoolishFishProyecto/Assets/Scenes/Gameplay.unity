@@ -13272,6 +13272,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4151981507132561800, guid: b4b45e49be315154dba4115723c8b073, type: 3}
+      propertyPath: flyingTimer
+      value: 
+      objectReference: {fileID: 845299270}
+    - target: {fileID: 4151981507132561800, guid: b4b45e49be315154dba4115723c8b073, type: 3}
       propertyPath: progressBar
       value: 
       objectReference: {fileID: 97291276}
