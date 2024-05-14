@@ -7,7 +7,7 @@ using System.Globalization;
 [Serializable]
 public abstract class TrackerEvent
 {
-    static DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+    public static DateTime epochStart = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 
     public enum EventType
     {

@@ -5,7 +5,8 @@ using UnityEngine;
 public class MenuManager_PK : MonoBehaviour
 {
     [Header("MENU MANAGER SETUP")]
-    [SerializeField]Transform buttonGroup; // Todos los botones son hijos de esto
+    [SerializeField]
+    protected Transform buttonGroup; // Todos los botones son hijos de esto
 
     // VARIABLES INTERNAS
     protected int nButtons;
@@ -26,6 +27,7 @@ public class MenuManager_PK : MonoBehaviour
     {
         // Almacenar botones
         nButtons = buttonGroup.childCount;
+
         buttons = new Button_PK[nButtons];
         for (int i = 0; i < nButtons; i++)
         {

@@ -39,6 +39,16 @@ public class Button_PK : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public void SetIndex(int index)
     { buttonIndex = index; }
 
+    public int GetIndex()
+    {
+        return buttonIndex;
+    }
+
+    public void SetText(string text)
+    {
+        thisText.text = text;
+    }
+
     #region PointerEvents
     public void OnPointerEnter(PointerEventData eventData)
     {

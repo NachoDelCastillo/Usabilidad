@@ -103,7 +103,7 @@ public class Tracker : MonoBehaviour
     {
         gamesQueue = new Queue<Queue<TrackerEvent>>();
         timesStartAndEnd = new Queue<Tuple<double, double>>();
-        readFile();
+        ReadFile();
 
         serializerObject = serializerType switch {
             SerializerType.JSON => new JSONSerializer(),
@@ -166,12 +166,12 @@ public class Tracker : MonoBehaviour
 		persistenceObject.Flush();
 	}
 
-    public void setIndexOfTheGameToReproduce(int index)
+    public void SetIndexOfTheGameToReproduce(int index)
     {
         IndexOfTheGameToReproduce = index;
     }
 
-    public Queue<TrackerEvent> getTheGameToReproduce()
+    public Queue<TrackerEvent> GetTheGameToReproduce()
     {
         if (IndexOfTheGameToReproduce >= 0 && IndexOfTheGameToReproduce < gamesQueue.Count)
         {
@@ -180,7 +180,7 @@ public class Tracker : MonoBehaviour
         return null;
     }
 
-    public Tuple<double,double> getTimesStartAndEnd()
+    public Tuple<double,double> GetTimesStartAndEnd()
     {
         if (IndexOfTheGameToReproduce >= 0 && IndexOfTheGameToReproduce < gamesQueue.Count)
         {
@@ -189,7 +189,17 @@ public class Tracker : MonoBehaviour
         return null;
     }
 
-    void readFile()
+    public int GetGameCount()
+    {
+        return gamesQueue.Count;
+    }
+
+    public double GetTimeStamp()
+    {
+        return gamesQueue.ElementAt(IndexOfTheGameToReproduce).ElementAt(0).getTimeStamp();
+    }
+
+    void ReadFile()
     {
         string directoryPath = Application.persistentDataPath;
 

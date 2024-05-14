@@ -45,8 +45,8 @@ public class InfoRecordered : MonoBehaviour
         playingRecordedGame = true;
         fishMovement = FindAnyObjectByType<FishMovement>();
 
-        eventsQueue = new Queue<TrackerEvent>(Tracker.Instance.getTheGameToReproduce());
-        Tuple<double, double> timesStartAndEnd = Tracker.Instance.getTimesStartAndEnd();
+        eventsQueue = new Queue<TrackerEvent>(Tracker.Instance.GetTheGameToReproduce());
+        Tuple<double, double> timesStartAndEnd = Tracker.Instance.GetTimesStartAndEnd();
 
         timeStart = timesStartAndEnd.Item1;
         timeEnd = timesStartAndEnd.Item2;
