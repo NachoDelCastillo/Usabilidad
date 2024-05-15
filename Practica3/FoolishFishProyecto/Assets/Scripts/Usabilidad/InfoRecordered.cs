@@ -77,6 +77,12 @@ public class InfoRecordered : MonoBehaviour
                 // Procesar el evento y quitarlo de la cola
                 ProcessEvent(eventsQueue.Dequeue());
             }
+
+            if(eventsQueue.Count <= 0)
+            {
+                Debug.Log("RecordedEvent : GameEnd");
+                GameManager.GetInstance().ChangeScene("ReplayMenu");
+            }
         }
     }
 
@@ -99,11 +105,6 @@ public class InfoRecordered : MonoBehaviour
     {
         switch (trackerEvent.GetEventTypeString())
         {
-            case "GAME_END":
-                Debug.Log("RecordedEvent : GameEnd");
-                GameManager.GetInstance().ChangeScene("ReplayMenu");
-                break;
-
             case "JUMP_START":
 
                 Debug.Log("RecordedEvent : JumpStart");
