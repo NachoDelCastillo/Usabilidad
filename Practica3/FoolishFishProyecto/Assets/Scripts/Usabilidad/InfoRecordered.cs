@@ -75,11 +75,13 @@ public class InfoRecordered : MonoBehaviour
 
             // Obtener el tiempo actual del juego   
             currentGameTime = Time.time - offset;
-            Debug.Log(currentGameTime);
+            //Debug.Log(currentGameTime);
 
             // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
             if (eventsQueue[indexEvent].getLocalTimeStamp() - timeStart <= currentGameTime)
             {
+                Debug.Log("EVENT WEBOS");
+
                 // Procesar el evento y quitarlo de la cola
                 ProcessEvent(eventsQueue[indexEvent]);
                 indexEvent++;

@@ -164,16 +164,36 @@ public class FishMovement : MonoBehaviour
     {
         if (movementInput.sqrMagnitude > 0.01)
         {
-            if (onLeftWall || onRightWall)
+            //if (onLeftWall || onRightWall)
+            //{
+            //    MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ?
+            //        MoveStartEvent.MoveDirection.UP : MoveStartEvent.MoveDirection.DOWN);
+
+            //    if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
+            //}
+            //else if (onGround)
+            //{
+            //    MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
+            //        MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
+
+            //    if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
+            //}
+
+
+            MoveStartEvent.MoveDirection currentDirection = MoveStartEvent.MoveDirection.NONE;
+            if (movementInput.y > 0)
+                currentDirection = MoveStartEvent.MoveDirection.UP;
+            else if (movementInput.y < 0)
+                currentDirection = MoveStartEvent.MoveDirection.DOWN;
+            if (movementInput.x > 0)
+                currentDirection = MoveStartEvent.MoveDirection.RIGHT;
+            else if (movementInput.x < 0)
+                currentDirection = MoveStartEvent.MoveDirection.LEFT;
+
+            if (currentDirection != MoveStartEvent.MoveDirection.NONE)
             {
-                MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.y > 0 ?
-                    MoveStartEvent.MoveDirection.UP : MoveStartEvent.MoveDirection.DOWN);
-                if(Tracker.Instance != null)Tracker.Instance.TrackEvent(moveStartEvent);
-            }
-            else if (onGround)
-            {
-                MoveStartEvent moveStartEvent = new MoveStartEvent(movementInput.x > 0 ?
-                    MoveStartEvent.MoveDirection.RIGHT : MoveStartEvent.MoveDirection.LEFT);
+                MoveStartEvent moveStartEvent = new MoveStartEvent(currentDirection);
+
                 if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
             }
         }
@@ -302,7 +322,10 @@ public class FishMovement : MonoBehaviour
         }
 
         lastFrameUnderwater = thisFrameUnderWater;
+
+       // Debug.Log("moveDirection_recorderedGame =" + moveDirection_recorderedGame);
     }
+
     public void CreateTrayectory()
     {
         if (onAir) { return; }
@@ -409,7 +432,6 @@ public class FishMovement : MonoBehaviour
                     case MoveStartEvent.MoveDirection.DOWN:
                         movementInput.y = -1;
                         break;
-
                 }
             }
             else
@@ -859,11 +881,13 @@ public class FishMovement : MonoBehaviour
         moveEnd_recordedGame= false;
 
         moveDirection_recorderedGame= moveDirection;
+
+        Debug.Log("MOVE START");
+        Debug.Log("moveDirection_recorderedGame = " + moveDirection_recorderedGame);
     }
 
     public void Process_MoveEndEvent()
     {
         moveEnd_recordedGame= true;
     }
-
 }

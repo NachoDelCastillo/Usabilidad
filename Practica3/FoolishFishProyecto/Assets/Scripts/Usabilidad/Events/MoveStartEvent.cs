@@ -2,7 +2,7 @@ using System;
 
 public class MoveStartEvent : TrackerEvent
 {
-    public enum MoveDirection { LEFT, RIGHT, UP, DOWN }
+    public enum MoveDirection { LEFT, RIGHT, UP, DOWN, NONE }
 
     MoveDirection moveDirection;
 
