@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices.ComTypes;
-
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -16,6 +16,7 @@ public class InfoRecordered : MonoBehaviour
     double timeStart, timeEnd, offset;
 
     Queue<TrackerEvent> eventsQueue;
+    List<double> jumpStartTimes;
 
     // Referencias
     // Referencia al script de movimiento del personaje principal
@@ -24,6 +25,7 @@ public class InfoRecordered : MonoBehaviour
     private Slider progressBar;
     [SerializeField] GameObject markerPrefab;
     [SerializeField] GameObject flyingTimer;
+    double currentGameTime;
 
     void Start()
     {
@@ -51,6 +53,8 @@ public class InfoRecordered : MonoBehaviour
         timeStart = timesStartAndEnd.Item1;
         timeEnd = timesStartAndEnd.Item2;
 
+        jumpStartTimes = new List<double>();
+
         setMarkersInProgessBar();
 
         progressBar.gameObject.SetActive(true);
@@ -69,7 +73,8 @@ public class InfoRecordered : MonoBehaviour
             TrackerEvent nextEvent = eventsQueue.Peek();
 
             // Obtener el tiempo actual del juego   
-            double currentGameTime = Time.time - offset;
+            currentGameTime = Time.time - offset;
+            Debug.Log(currentGameTime);
 
             // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
             if (nextEvent.getLocalTimeStamp() - timeStart <= currentGameTime)
@@ -88,16 +93,20 @@ public class InfoRecordered : MonoBehaviour
 
     void setMarkersInProgessBar()
     {
+        int jumpIndex = 0;
         foreach (TrackerEvent trackerEvent_ in eventsQueue)
         {
-            if (trackerEvent_.Type() != TrackerEvent.EventType.JUMP_END)
+            if (trackerEvent_.Type() != TrackerEvent.EventType.JUMP_START)
                 continue;
 
             Vector2 markerPosition = new Vector2((float)
                 ((trackerEvent_.getLocalTimeStamp() - timeStart) / timeEnd * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x, 0);
 
-            Instantiate(markerPrefab, progressBar.transform)
-                .GetComponent<RectTransform>().anchoredPosition = markerPosition;
+            GameObject instance = Instantiate(markerPrefab, progressBar.transform);
+            instance.GetComponent<RectTransform>().anchoredPosition = markerPosition;
+            instance.GetComponent<JumpButton>().jumpButtonIndex = jumpIndex;
+            jumpStartTimes.Add(trackerEvent_.getLocalTimeStamp()-timeStart);
+            jumpIndex++;
         }
     }
 
@@ -131,5 +140,37 @@ public class InfoRecordered : MonoBehaviour
                 fishMovement.Process_MoveEndEvent();
                 break;
         }
+    }
+
+    public void ResetEventQueue(int jumpIndex)
+    {
+        int numJumsps = 0;
+        eventsQueue.Clear();
+        eventsQueue = new Queue<TrackerEvent>(Tracker.Instance.GetTheGameToReproduce());
+        Queue<TrackerEvent> aux = new Queue<TrackerEvent>(Tracker.Instance.GetTheGameToReproduce());
+        foreach (TrackerEvent trackerEvent_ in aux)
+        {
+            if (trackerEvent_.Type() != TrackerEvent.EventType.JUMP_END && jumpIndex!=0)
+            {
+                eventsQueue.Dequeue();
+            }
+            else if(trackerEvent_.Type() == TrackerEvent.EventType.JUMP_END)
+            {
+                if(numJumsps==jumpIndex)
+                {
+                    JumpEndEvent event_ = (JumpEndEvent) trackerEvent_;
+                    fishMovement.transform.position = event_.getPlayerPos();
+                    double auxOffset = Time.time - offset - jumpStartTimes[jumpIndex];
+                    offset += auxOffset+1;
+                    break;
+                }
+                else
+                {
+                    eventsQueue.Dequeue();
+                    numJumsps++;
+                }
+            }
+        }
+
     }
 }
