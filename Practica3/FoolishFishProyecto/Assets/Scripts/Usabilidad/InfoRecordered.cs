@@ -19,6 +19,7 @@ public class InfoRecordered : MonoBehaviour
 
     List<TrackerEvent> eventsQueue;
     List<double> jumpEndTimes;
+    List<int> jumpEndIndex;
 
     // Referencias
     // Referencia al script de movimiento del personaje principal
@@ -29,6 +30,7 @@ public class InfoRecordered : MonoBehaviour
     [SerializeField] GameObject flyingTimer;
     double currentGameTime;
     int indexEvent = 0;
+    int jumpIndex_ = 0;
 
     void Start()
     {
@@ -51,12 +53,14 @@ public class InfoRecordered : MonoBehaviour
         fishMovement = FindAnyObjectByType<FishMovement>();
 
         eventsQueue = new List<TrackerEvent>(Tracker.Instance.GetTheGameToReproduce());
+
         Tuple<double, double> timesStartAndEnd = Tracker.Instance.GetTimesStartAndEnd();
 
         timeStart = timesStartAndEnd.Item1;
         timeEnd = timesStartAndEnd.Item2;
 
         jumpEndTimes = new List<double>();
+        jumpEndIndex = new List<int>();
 
         setMarkersInProgessBar();
 
@@ -91,6 +95,7 @@ public class InfoRecordered : MonoBehaviour
         {
 
             Debug.Log("RecordedEvent : GameEnd");
+            eventsQueue.Clear();
             GameManager.GetInstance().ChangeScene("ReplayMenu");
         }
     }
@@ -111,6 +116,7 @@ public class InfoRecordered : MonoBehaviour
             GameObject instance = Instantiate(markerPrefab, progressBar.transform);
             instance.GetComponent<RectTransform>().anchoredPosition = markerPosition;
             instance.GetComponent<JumpButton>().eventIndex = indexEvent_;
+            jumpEndIndex.Add(indexEvent_);
             instance.GetComponent<JumpButton>().jumpButtonIndex = jumpIndex;
             jumpEndTimes.Add(trackerEvent_.getLocalTimeStamp()-timeStart);
             jumpIndex++;
@@ -122,14 +128,13 @@ public class InfoRecordered : MonoBehaviour
         switch (trackerEvent.GetEventTypeString())
         {
             case "JUMP_START":
-
+                jumpIndex_++;
                 Debug.Log("RecordedEvent : JumpStart");
                 JumpStartEvent jumpStartEvent = (JumpStartEvent)trackerEvent;
                 fishMovement.Process_JumpStartEvent(jumpStartEvent.getPlayerPos(), jumpStartEvent.getMousePos());
                 break;
 
             case "JUMP_END":
-
                 Debug.Log("RecordedEvent : JumpEnd");
                 JumpEndEvent jumpEndEvent = (JumpEndEvent)trackerEvent;
                 fishMovement.Process_JumpEndEvent(jumpEndEvent.getPlayerPos());
@@ -149,15 +154,44 @@ public class InfoRecordered : MonoBehaviour
         }
     }
 
-    public void ResetEventQueue(int jumpIndex,int eventIndex)
+    public void ResetEventQueue(int jumpIndex, int eventIndex)
     {
         indexEvent = eventIndex;
-        JumpEndEvent event_ = (JumpEndEvent) (eventsQueue[eventIndex]);  
+        jumpIndex_ = jumpIndex;
+        JumpEndEvent event_ = (JumpEndEvent)(eventsQueue[eventIndex]);
         fishMovement.transform.position = event_.getPlayerPos();
 
         offset += Time.time - offset - jumpEndTimes[jumpIndex];
         fishMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+    }
 
+    public void NextJump()
+    {
+        if(jumpIndex_< jumpEndIndex.Count-1)
+        {
+            jumpIndex_++;
+            UpdateFishJump();
+        }
+
+    }
+
+    public void PrevJump()
+    {
+        if(jumpIndex_> 0)
+        {
+            jumpIndex_--;
+            UpdateFishJump();
+        }
+
+    }
+
+    private void UpdateFishJump()
+    {
+        indexEvent = jumpEndIndex[jumpIndex_];
+        JumpEndEvent event_ = (JumpEndEvent)(eventsQueue[indexEvent]);
+        fishMovement.transform.position = event_.getPlayerPos();
+        offset += Time.time - offset - jumpEndTimes[jumpIndex_];
+        fishMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }
 
