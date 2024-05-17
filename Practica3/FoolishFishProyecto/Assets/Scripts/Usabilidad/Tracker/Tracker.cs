@@ -243,7 +243,10 @@ public class Tracker : MonoBehaviour
                                 break;
                             case "GAME_END":
                                 timeEnd = localTimeStamp;
-                                Debug.Log("TimeEnd : " + timeEnd);
+                                trackerEvent = new GameEndEvent(event_.gameCompleted,gameVersion,
+                                    userID,timeStamp,localTimeStamp);
+                                
+                               Debug.Log("TimeEnd : " + timeEnd);
                                 break;
                             case "JUMP_START":
                                 trackerEvent = new JumpStartEvent(gameVersion, userID, event_.platformId,

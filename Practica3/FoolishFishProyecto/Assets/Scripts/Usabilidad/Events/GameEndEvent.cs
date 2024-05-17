@@ -9,6 +9,13 @@ public class GameEndEvent : TrackerEvent
         this.gameCompleted = gameCompleted;
     }
 
+    public GameEndEvent(bool gameCompleted, string gameVersion, string userId,
+        double timeStamp, double localTimeStamp) : base(gameVersion, userId, EventType.GAME_END, timeStamp, localTimeStamp)
+    {
+        this.gameCompleted = gameCompleted;
+        
+    }
+
     public override string ToCSV()
     {
         return base.ToCSV() + string.Format(",{0}", gameCompleted);
