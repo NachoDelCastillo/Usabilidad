@@ -188,6 +188,7 @@ public class InfoRecordered : MonoBehaviour
         JumpEndEvent event_ = (JumpEndEvent)(eventsQueue[indexEvent]);
         fishMovement.transform.position = event_.getPlayerPos();
         offset += Time.time - offset - jumpEndTimes[jumpIndex_];
+
         fishMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

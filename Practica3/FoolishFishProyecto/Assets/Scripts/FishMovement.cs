@@ -22,7 +22,7 @@ public class FishMovement : MonoBehaviour
 
     MoveStartEvent.MoveDirection moveDirection_recorderedGame;
 
-    bool moveEnd_recordedGame;  
+    bool moveEnd_recordedGame;
     bool moveStart_recordedGame;
 
     // Tiempo que dura el reajuste en la posicion del jugador en momentos clave (Al iniciar un salto, al aterrizar, al empezar a moverse)
@@ -104,6 +104,24 @@ public class FishMovement : MonoBehaviour
     int currentPlatform;
 
     int currentPlatformWhenJumped;
+
+    // Se llama cuando el personaje se teletrantransporta a causa de los botones en la barra de progreso en la repeticion de una partida
+    // Reseta las variables relacionadas con el pescado en la pared o en un suelo
+    public void ResetVariables()
+    {
+        onGround = false;
+        onGround_Remember = false;
+
+        onLeftWall = false;
+        onRightWall = false;
+        onLeftWall_Remember = false;
+        onRightWall_Remember = false;
+
+        onAir = false;
+        onJumpingAnimation = false;
+
+        anim.SetTrigger("CancelJump");
+    }
 
     #region Input Setup
 
@@ -337,7 +355,7 @@ public class FishMovement : MonoBehaviour
 
         lastFrameUnderwater = thisFrameUnderWater;
 
-       // Debug.Log("moveDirection_recorderedGame =" + moveDirection_recorderedGame);
+        // Debug.Log("moveDirection_recorderedGame =" + moveDirection_recorderedGame);
     }
 
     public void CreateTrayectory()
@@ -430,7 +448,7 @@ public class FishMovement : MonoBehaviour
             // En caso de que se este rejugando un partida grabada, desactivar controles
 
             #region Movement
-            if(moveStart_recordedGame && !moveEnd_recordedGame)
+            if (moveStart_recordedGame && !moveEnd_recordedGame)
             {
                 switch (moveDirection_recorderedGame)
                 {
@@ -439,7 +457,7 @@ public class FishMovement : MonoBehaviour
                         break;
                     case MoveStartEvent.MoveDirection.RIGHT:
                         movementInput.x = 1;
-                        break;  
+                        break;
                     case MoveStartEvent.MoveDirection.UP:
                         movementInput.y = 1;
                         break;
@@ -817,7 +835,7 @@ public class FishMovement : MonoBehaviour
         currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
         JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
 
-        if(Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
+        if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
 
         // Cada vez que se aterriza en una plataforma, se registra a su vez todos los inputs que puede estar presionando el usuario
         EvaluateMoveEvent();
@@ -894,9 +912,9 @@ public class FishMovement : MonoBehaviour
     public void Process_MoveStartEvent(MoveStartEvent.MoveDirection moveDirection)
     {
         moveStart_recordedGame = true;
-        moveEnd_recordedGame= false;
+        moveEnd_recordedGame = false;
 
-        moveDirection_recorderedGame= moveDirection;
+        moveDirection_recorderedGame = moveDirection;
 
         Debug.Log("MOVE START");
         Debug.Log("moveDirection_recorderedGame = " + moveDirection_recorderedGame);
@@ -904,6 +922,6 @@ public class FishMovement : MonoBehaviour
 
     public void Process_MoveEndEvent()
     {
-        moveEnd_recordedGame= true;
+        moveEnd_recordedGame = true;
     }
 }
