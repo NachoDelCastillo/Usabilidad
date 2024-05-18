@@ -160,6 +160,7 @@ public class InfoRecordered : MonoBehaviour
 
         offset += Time.time - offset - jumpEndTimes[jumpIndex];
         fishMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        fishMovement.ResetVariables();
     }
 
     public void NextJump()
@@ -190,6 +191,7 @@ public class InfoRecordered : MonoBehaviour
         offset += Time.time - offset - jumpEndTimes[jumpIndex_];
 
         fishMovement.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        fishMovement.ResetVariables();
     }
 }
 

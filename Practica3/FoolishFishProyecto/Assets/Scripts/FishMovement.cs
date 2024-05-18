@@ -109,8 +109,8 @@ public class FishMovement : MonoBehaviour
     // Reseta las variables relacionadas con el pescado en la pared o en un suelo
     public void ResetVariables()
     {
-        onGround = false;
-        onGround_Remember = false;
+        onGround = true;
+        onGround_Remember = true;
 
         onLeftWall = false;
         onRightWall = false;
@@ -120,7 +120,22 @@ public class FishMovement : MonoBehaviour
         onAir = false;
         onJumpingAnimation = false;
 
+        xVelocityRemember = 0;
+
+        hasJumped = false;
+        currentXvel = 0;
+        currentYvel = 0;
+
+        jump_performed = false;
+        jump_hold = false;
+        jump_canceled = false;
+
         anim.SetTrigger("CancelJump");
+
+        movementInput.x = 0;
+        movementInput.y = 0;
+
+        Land();
     }
 
     #region Input Setup
@@ -831,14 +846,16 @@ public class FishMovement : MonoBehaviour
 
     void Land()
     {
+        if (Tracker.Instance != null) {
 
-        currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
-        JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
+            currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
+            JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
 
-        if (Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
+            Tracker.Instance.TrackEvent(trackerEvent);
 
-        // Cada vez que se aterriza en una plataforma, se registra a su vez todos los inputs que puede estar presionando el usuario
-        EvaluateMoveEvent();
+            // Cada vez que se aterriza en una plataforma, se registra a su vez todos los inputs que puede estar presionando el usuario
+            EvaluateMoveEvent();
+        }
 
         Debug.Log("LAND FROM " + currentPlatform);
 
