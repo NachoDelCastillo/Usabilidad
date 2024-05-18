@@ -162,6 +162,13 @@ public class FishMovement : MonoBehaviour
 
     public void SendMoveEvent(InputAction.CallbackContext obj)
     {
+        EvaluateMoveEvent();
+    }
+
+    // Se llama cuando el jugador ha presionado una tecla de movimiento, o cuando se envia un evento jumpEnd, para registrar el input del jugador en
+    // ese preciso momento si esque hay alguno
+    void EvaluateMoveEvent()
+    {
         if (movementInput.sqrMagnitude > 0.01)
         {
             //if (onLeftWall || onRightWall)
@@ -180,20 +187,26 @@ public class FishMovement : MonoBehaviour
             //}
 
 
+            // Arriba o abajo
             MoveStartEvent.MoveDirection currentDirection = MoveStartEvent.MoveDirection.NONE;
             if (movementInput.y > 0)
                 currentDirection = MoveStartEvent.MoveDirection.UP;
             else if (movementInput.y < 0)
                 currentDirection = MoveStartEvent.MoveDirection.DOWN;
+            if (currentDirection != MoveStartEvent.MoveDirection.NONE)
+            {
+                MoveStartEvent moveStartEvent = new MoveStartEvent(currentDirection);
+                if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
+            }
+
+            // A izquierda o derecha
             if (movementInput.x > 0)
                 currentDirection = MoveStartEvent.MoveDirection.RIGHT;
             else if (movementInput.x < 0)
                 currentDirection = MoveStartEvent.MoveDirection.LEFT;
-
             if (currentDirection != MoveStartEvent.MoveDirection.NONE)
             {
                 MoveStartEvent moveStartEvent = new MoveStartEvent(currentDirection);
-
                 if (Tracker.Instance != null) Tracker.Instance.TrackEvent(moveStartEvent);
             }
         }
@@ -202,6 +215,7 @@ public class FishMovement : MonoBehaviour
             if (Tracker.Instance != null) Tracker.Instance.TrackEvent(new MoveEndEvent());
         }
     }
+
 
     public void CanJumpNow()
     {
@@ -803,10 +817,12 @@ public class FishMovement : MonoBehaviour
         currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
         JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
 
-        if(Tracker.Instance != null)Tracker.Instance.TrackEvent(trackerEvent);
+        if(Tracker.Instance != null) Tracker.Instance.TrackEvent(trackerEvent);
+
+        // Cada vez que se aterriza en una plataforma, se registra a su vez todos los inputs que puede estar presionando el usuario
+        EvaluateMoveEvent();
 
         Debug.Log("LAND FROM " + currentPlatform);
-
 
 
         GameplayManager.Instance.RecalculateWaterLevel(transform.position.y);
