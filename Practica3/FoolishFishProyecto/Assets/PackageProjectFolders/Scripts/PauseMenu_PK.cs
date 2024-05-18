@@ -8,8 +8,14 @@ public class PauseMenu_PK : MenuManager_PK
     AllMenuManager_PK allMenuManager;
 
     GameObject pauseObj;
+    [SerializeField]
+    private GameObject progressBarUI;
+    [SerializeField]
+    private GameObject pauseButton;
 
     [HideInInspector] static public bool paused = false;
+
+    float timeScale;
 
     protected override void ExtraAwake()
     {
@@ -57,25 +63,25 @@ public class PauseMenu_PK : MenuManager_PK
     {
         // Sound
         //AudioManager_PK.GetInstance().Play("Pause", 1);
-
+        timeScale = Time.timeScale;
         Time.timeScale = 0;
         paused = true;
         canUseControllerSelection = true;
         pauseObj.SetActive(true);
+        progressBarUI.SetActive(false);
     }
 
     void Unpause()
     {
         // Sound
-        //AudioManager_PK.GetInstance().Play("Pause", 1);
-        GameObject pauseButton = GameObject.Find("PauseButton");
+
         PauseRecordedGameplay pauseRecorededButton;
         if (pauseButton != null)
         {
             pauseRecorededButton = pauseButton.GetComponent<PauseRecordedGameplay>();
             if (pauseRecorededButton == null || (pauseRecorededButton && !pauseRecorededButton.IsPaused()))
             {
-                Time.timeScale = 1;
+                Time.timeScale = timeScale;
             }
         }
 
@@ -84,5 +90,6 @@ public class PauseMenu_PK : MenuManager_PK
         //StopAllCoroutines();
         canUseControllerSelection = false;
         pauseObj.SetActive(false);
+        progressBarUI.SetActive(true);
     }
 }

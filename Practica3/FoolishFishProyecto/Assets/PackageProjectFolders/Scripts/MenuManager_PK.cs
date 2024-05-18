@@ -80,6 +80,7 @@ public class MenuManager_PK : MonoBehaviour
                 AudioManager_PK.GetInstance().Play("ButtonPress", 1);
 
             buttonSelected = -1;
+            mouseOverSelectedButton = false;
         }
     }
     protected virtual void buttonPressed(int index) { }

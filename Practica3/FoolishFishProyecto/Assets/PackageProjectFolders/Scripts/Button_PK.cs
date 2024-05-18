@@ -95,6 +95,7 @@ public class Button_PK : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         // Animation
         thisText.transform.DOScale(Vector3.one * thisText_InitScale, buttonScaleVel).SetUpdate(true);
+        
     }
 
     #endregion
