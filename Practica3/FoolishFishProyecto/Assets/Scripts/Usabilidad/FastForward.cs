@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class FastForward : MonoBehaviour
 {
-    private UnityEngine.UI.Slider _slider;
+    private TMPro.TMP_Dropdown _dropdown;
 
     private void Start()
     {
-        _slider = GetComponent<UnityEngine.UI.Slider>();
+        _dropdown = GetComponent<TMPro.TMP_Dropdown>();
     }
 
     public void OnValueChanged()
     {
-        Time.timeScale = _slider.value;
+        int value = _dropdown.value;
+        Time.timeScale = (value + 1) * 0.25f;
         Debug.Log("Time scale actual: " + Time.timeScale);
     }
 }

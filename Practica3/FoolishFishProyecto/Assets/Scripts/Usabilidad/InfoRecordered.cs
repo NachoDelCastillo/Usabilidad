@@ -1,13 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-using Unity.VisualScripting;
-using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class InfoRecordered : MonoBehaviour
@@ -24,8 +17,13 @@ public class InfoRecordered : MonoBehaviour
     // Referencias
     // Referencia al script de movimiento del personaje principal
     FishMovement fishMovement;
+
+    [SerializeField]
+    private GameObject replayGroup;
+
     [SerializeField]
     private Slider progressBar;
+
     [SerializeField] GameObject markerPrefab;
     [SerializeField] GameObject flyingTimer;
     double currentGameTime;
@@ -37,9 +35,10 @@ public class InfoRecordered : MonoBehaviour
         if (!Tracker.Instance.ReplayMode)
         {
             playingRecordedGame = false;
+            replayGroup.gameObject.SetActive(false);
+            replayGroup.SetActive(false);
             gameObject.SetActive(false);
 
-            progressBar.gameObject.SetActive(false);
             return;
         }
         else
@@ -84,8 +83,6 @@ public class InfoRecordered : MonoBehaviour
             // Si el tiempo del próximo evento es menor o igual al tiempo actual del juego
             if (eventsQueue[indexEvent].getLocalTimeStamp() - timeStart <= currentGameTime)
             {
-                Debug.Log("EVENT WEBOS");
-
                 // Procesar el evento y quitarlo de la cola
                 ProcessEvent(eventsQueue[indexEvent]);
                 indexEvent++;
