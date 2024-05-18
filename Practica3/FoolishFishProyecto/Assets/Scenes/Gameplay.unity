@@ -2108,6 +2108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoRecorderd: {fileID: 1992808830}
+  pauseRecorded: {fileID: 1172777740}
 --- !u!114 &335312059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14750,6 +14751,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infoRecorderd: {fileID: 1992808830}
+  pauseRecorded: {fileID: 1172777740}
 --- !u!114 &2023698320
 MonoBehaviour:
   m_ObjectHideFlags: 0

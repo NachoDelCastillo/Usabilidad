@@ -88,7 +88,7 @@ public class InfoRecordered : MonoBehaviour
                 indexEvent++;
             }
         }
-        else
+        else if(eventsQueue.Count>0)
         {
 
             Debug.Log("RecordedEvent : GameEnd");
