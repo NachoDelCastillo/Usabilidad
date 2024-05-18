@@ -170,7 +170,6 @@ public class InfoRecordered : MonoBehaviour
             jumpIndex_++;
             UpdateFishJump();
         }
-
     }
 
     public void PrevJump()

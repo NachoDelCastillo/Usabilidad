@@ -36,6 +36,10 @@ public class FishMovement : MonoBehaviour
     // Guarda la posicion del personaje cuando se pulso saltar con el raton, para despues enviar el evento cuando se haya confirmado el salto
     Vector2 playerPosJumpStart;
 
+    // Indicador de si el personaje se acaba de teletransportar usando las barras de progreso de la grabacion
+    // Se mantiene en true durante .2 segundos
+    bool justTeleported = false;
+
     /////////////////////////////////////////////////////////////////////////////////////////////
 
     [SerializeField]
@@ -136,6 +140,15 @@ public class FishMovement : MonoBehaviour
         movementInput.y = 0;
 
         Land();
+
+        justTeleported = true;
+
+        Invoke("JustTeleportedFalse", .2f);
+    }
+
+    void JustTeleportedFalse()
+    {
+        justTeleported = false;
     }
 
     #region Input Setup
@@ -568,7 +581,10 @@ public class FishMovement : MonoBehaviour
     public void JumpAnimationTrigger()
     {
         onJumpingAnimation = false;
-        Jump();
+
+        // No permitir saltar si  se acaba de teletransportar al personaje con una grabacion
+        if (!justTeleported)
+            Jump();
     }
 
     public void Jump()
@@ -846,7 +862,8 @@ public class FishMovement : MonoBehaviour
 
     void Land()
     {
-        if (Tracker.Instance != null) {
+        if (Tracker.Instance != null)
+        {
 
             currentPlatform = PlatformObserver.Instance.GetCurrentFishPlatform();
             JumpEndEvent trackerEvent = new JumpEndEvent(currentPlatform, transform.position);
