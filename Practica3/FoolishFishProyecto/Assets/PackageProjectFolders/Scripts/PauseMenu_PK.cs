@@ -78,18 +78,22 @@ public class PauseMenu_PK : MenuManager_PK
         PauseRecordedGameplay pauseRecorededButton;
         if (pauseButton != null)
         {
+
             pauseRecorededButton = pauseButton.GetComponent<PauseRecordedGameplay>();
             if (pauseRecorededButton == null || (pauseRecorededButton && !pauseRecorededButton.IsPaused()))
             {
                 Time.timeScale = timeScale;
             }
         }
-
+        InfoRecordered infoRecordered = GameObject.Find("ReplayGame").GetComponent<InfoRecordered>();
+        if (infoRecordered != null)
+        {
+            progressBarUI.SetActive(true);
+        }
 
         paused = false;
         //StopAllCoroutines();
         canUseControllerSelection = false;
         pauseObj.SetActive(false);
-        progressBarUI.SetActive(true);
     }
 }
