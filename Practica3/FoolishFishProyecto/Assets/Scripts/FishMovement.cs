@@ -847,7 +847,8 @@ public class FishMovement : MonoBehaviour
         //Bounce
         if (Mathf.Abs(rb.velocity.x - xVelocityRemember) > 0.5f && onAir)
         {
-            rb.velocity = new Vector2(-xVelocityRemember * 0.9f, rb.velocity.y * 0.9f);
+            //rb.velocity = new Vector2(-xVelocityRemember * 0.9f, rb.velocity.y * 0.9f);
+            rb.velocity = new Vector2(-xVelocityRemember * 0.96f, rb.velocity.y * 0.96f);
         }
 
         xVelocityRemember = rb.velocity.x;
