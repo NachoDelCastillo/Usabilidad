@@ -85,8 +85,8 @@ public class PauseMenu_PK : MenuManager_PK
                 Time.timeScale = timeScale;
             }
         }
-        InfoRecordered infoRecordered = GameObject.Find("ReplayGame").GetComponent<InfoRecordered>();
-        if (infoRecordered != null)
+        
+        if (Tracker.Instance.ReplayMode)
         {
             progressBarUI.SetActive(true);
         }
