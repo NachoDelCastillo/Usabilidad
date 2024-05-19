@@ -71,7 +71,7 @@ public class InfoRecordered : MonoBehaviour
 
     void Update()
     {
-        progressBar.value = (float)((Time.time - offset) / timeEnd);
+        progressBar.value = (float)((Time.time - offset) / (timeEnd-timeStart));
 
         if (indexEvent < eventsQueue.Count)
         {
@@ -108,7 +108,7 @@ public class InfoRecordered : MonoBehaviour
                 continue;
 
             Vector2 markerPosition = new Vector2((float)
-                ((trackerEvent_.getLocalTimeStamp() - timeStart) / timeEnd * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x, 0);
+                ((trackerEvent_.getLocalTimeStamp() - timeStart) / (timeEnd-timeStart) * 0.96f + 0.011f) * progressBar.GetComponent<RectTransform>().sizeDelta.x, 0);
 
             GameObject instance = Instantiate(markerPrefab, progressBar.transform);
             instance.GetComponent<RectTransform>().anchoredPosition = markerPosition;
