@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3306659037765918231}
   m_Layer: 0
-  m_Name: _ Slime NoCollider
+  m_Name: _ Slime 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -189,7 +189,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7360056171752259032}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
