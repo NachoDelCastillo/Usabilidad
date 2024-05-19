@@ -123,7 +123,7 @@ public class AllMenuManager_PK : MonoBehaviour
     {
         StartCoroutine(EnableMenu(mainMenu, true, cameraSpeed / 2));
 
-        cameraObj.DOMoveX(cameraDistanceX, cameraSpeed);
+        cameraObj.DOMove(Vector3.zero, cameraSpeed);
     }
 
     public void BackToMainMenu()
